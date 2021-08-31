@@ -24,5 +24,23 @@ public class PersonageController {
         return new ResponseEntity<>(personageService.getAllNameAndImage(), HttpStatus.OK);
     }
 
+    @PostMapping("/save")
+    public ResponseEntity<PersonageDto> save(@RequestBody PersonageDto personageDto) {
+        return new ResponseEntity<>(personageService.save(personageDto), HttpStatus.CREATED);
+    }
 
+    @PutMapping("/update/{id}")
+    public ResponseEntity<PersonageDto> update(@RequestBody PersonageDto personageDto, @PathVariable Integer id) {
+        PersonageDto personageDtoActual = personageService.getPersonageById(id).get();
+        personageDtoActual.setName(personageDto.getName());
+        personageDtoActual.setAge(personageDto.getAge());
+        personageDtoActual.setImage(personageDto.getImage());
+        personageDtoActual.setHistory(personageDto.getHistory());
+        return new ResponseEntity<>(personageService.save(personageDtoActual), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity delete(@PathVariable("id") Integer id) {
+        return personageService.delete(id) ? new ResponseEntity(HttpStatus.OK) : new ResponseEntity(HttpStatus.NOT_FOUND);
+    }
 }
