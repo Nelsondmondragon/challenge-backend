@@ -1,0 +1,22 @@
+package com.nedacort.challengespringbackend.domain.repository;
+
+import com.nedacort.challengespringbackend.domain.PersonageDto;
+import com.nedacort.challengespringbackend.persistence.entity.Personaje;
+
+import java.util.List;
+import java.util.Optional;
+
+public interface PersonageDtoRepository {
+
+    List<PersonageDto> getAll();
+
+    Optional<PersonageDto> getPersonageById(Integer id);
+
+
+    Optional<List<PersonageDto>> getAllPersonajesAndPeliculas();
+
+
+    PersonageDto save(PersonageDto personageDto);
+
+    void delete(Integer id);
+}
