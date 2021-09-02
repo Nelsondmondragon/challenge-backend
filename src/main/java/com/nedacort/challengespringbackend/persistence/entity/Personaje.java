@@ -21,6 +21,8 @@ public class Personaje {
 
     private String historia;
 
+    private Integer peso;
+
     @OneToMany(mappedBy = "personaje", cascade = {CascadeType.ALL})
     private List<PersonajePelicula> personajePeliculas;
 }

@@ -4,7 +4,7 @@ package com.nedacort.challengespringbackend.domain;
 
 @Data
 public class GenusDto {
-    private Integer id;
+
     private String name;
     private byte[] image;
 }

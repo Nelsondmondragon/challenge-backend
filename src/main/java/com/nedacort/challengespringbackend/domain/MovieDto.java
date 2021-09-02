@@ -11,6 +11,6 @@ public class MovieDto {
     private byte[] image;
     private String tittle;
     private LocalDateTime creationDate;
-    private Integer idGenus;
-    private Integer idQualification;
+    private QualificationDto qualificationDto;
+    private GenusDto genusDto;
 }

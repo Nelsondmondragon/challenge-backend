@@ -13,9 +13,6 @@ public interface PersonageDtoRepository {
     Optional<PersonageDto> getPersonageById(Integer id);
 
 
-    Optional<List<PersonageDto>> getAllPersonajesAndPeliculas();
-
-
     PersonageDto save(PersonageDto personageDto);
 
     void delete(Integer id);

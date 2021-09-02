@@ -10,4 +10,5 @@ public class PersonageDto {
     private byte[] image;
     private Integer age;
     private String history;
+    private Integer peso;
 }

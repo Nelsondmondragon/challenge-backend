@@ -2,13 +2,16 @@ package com.nedacort.challengespringbackend.persistence;
 
 import com.nedacort.challengespringbackend.domain.PersonageDto;
 import com.nedacort.challengespringbackend.domain.PersonageDto1;
+import com.nedacort.challengespringbackend.domain.PersonageMovieDto;
 import com.nedacort.challengespringbackend.domain.repository.MovieDtoRepository;
 import com.nedacort.challengespringbackend.domain.repository.PersonageDto1Repository;
 import com.nedacort.challengespringbackend.domain.repository.PersonageDtoRepository;
+import com.nedacort.challengespringbackend.domain.repository.PersonageMovieDtoRepository;
 import com.nedacort.challengespringbackend.persistence.crud.PersonajeCrudRepository;
 import com.nedacort.challengespringbackend.persistence.entity.Personaje;
 import com.nedacort.challengespringbackend.persistence.mapper.PersonageDto1Mapper;
 import com.nedacort.challengespringbackend.persistence.mapper.PersonageDtoMapper;
+import com.nedacort.challengespringbackend.persistence.mapper.PersonageMovieDtoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -16,7 +19,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public class PersonageRepository implements PersonageDtoRepository, PersonageDto1Repository {
+public class PersonageRepository implements PersonageDtoRepository, PersonageDto1Repository, PersonageMovieDtoRepository {
 
     @Autowired
     private PersonajeCrudRepository personajeCrudRepository;
@@ -26,6 +29,9 @@ public class PersonageRepository implements PersonageDtoRepository, PersonageDto
 
     @Autowired
     private PersonageDto1Mapper personageDto1Mapper;
+
+    @Autowired
+    private PersonageMovieDtoMapper personageMovieDtoMapper;
 
     @Override
     public List<PersonageDto> getAll() {
@@ -43,15 +49,6 @@ public class PersonageRepository implements PersonageDtoRepository, PersonageDto
                 .map(personaje -> personageDtoMapper.toPersonageDto(personaje));
     }
 
-
-    @Override
-    public Optional<List<PersonageDto>> getAllPersonajesAndPeliculas() {
-        return personajeCrudRepository.findAllPersonajesAndPeliculas().map(
-                personajes -> personageDtoMapper.toPersonageDtos(personajes)
-        );
-    }
-
-
     @Override
     public PersonageDto save(PersonageDto personageDto) {
         return personageDtoMapper.toPersonageDto(personajeCrudRepository.save(personageDtoMapper.toPersonaje(personageDto)));
@@ -63,4 +60,9 @@ public class PersonageRepository implements PersonageDtoRepository, PersonageDto
     }
 
 
+    @Override
+    public Optional<List<PersonageMovieDto>> findAllPersonajesAndPeliculas() {
+
+        return Optional.empty();
+    }
 }

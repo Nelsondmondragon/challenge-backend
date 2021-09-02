@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/characters")
 public class PersonageController {
 
 
@@ -19,10 +19,11 @@ public class PersonageController {
     private PersonageService personageService;
 
 
-    @GetMapping("/characters")
+    @GetMapping("/all")
     private ResponseEntity<List<PersonageDto1>> getAll() {
         return new ResponseEntity<>(personageService.getAllNameAndImage(), HttpStatus.OK);
     }
+
 
     @PostMapping("/save")
     public ResponseEntity<PersonageDto> save(@RequestBody PersonageDto personageDto) {
@@ -43,4 +44,5 @@ public class PersonageController {
     public ResponseEntity delete(@PathVariable("id") Integer id) {
         return personageService.delete(id) ? new ResponseEntity(HttpStatus.OK) : new ResponseEntity(HttpStatus.NOT_FOUND);
     }
+
 }

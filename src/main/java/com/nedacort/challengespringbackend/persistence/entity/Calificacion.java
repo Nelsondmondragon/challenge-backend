@@ -14,8 +14,7 @@ public class Calificacion {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-
-    private String calificacion;
+    private Integer calificacion;
 
     @OneToMany(mappedBy = "calificacion", cascade = {CascadeType.ALL})
     private List<Pelicula> peliculas;

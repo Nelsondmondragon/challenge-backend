@@ -16,14 +16,7 @@ public interface PersonageDto1Mapper {
             @Mapping(source = "imagen", target = "image")
     })
     PersonageDto1 toPersonageDto1(Personaje personaje);
-
     List<PersonageDto1> toPersonageDto1S(List<Personaje> personajes);
 
-    @InheritInverseConfiguration
-    @Mapping(target = "id", ignore = true)
-    @Mapping(target = "personajePeliculas", ignore = true)
-    @Mapping(target = "edad", ignore = true)
-    @Mapping(target = "historia", ignore = true)
-    Personaje toPersonaje(PersonageDto1 personageDto1);
 
 }
