@@ -1,15 +1,14 @@
 package com.nedacort.challengespringbackend.persistence;
 
 import com.nedacort.challengespringbackend.domain.PersonageDto;
-import com.nedacort.challengespringbackend.domain.PersonageDto1;
-import com.nedacort.challengespringbackend.domain.PersonageMovieDto;
-import com.nedacort.challengespringbackend.domain.repository.MovieDtoRepository;
-import com.nedacort.challengespringbackend.domain.repository.PersonageDto1Repository;
+import com.nedacort.challengespringbackend.domain.PersonageDtoDetail;
+import com.nedacort.challengespringbackend.domain.PersonageDtoLimited;
+import com.nedacort.challengespringbackend.domain.repository.PersonageDtoLimitedRepository;
 import com.nedacort.challengespringbackend.domain.repository.PersonageDtoRepository;
 import com.nedacort.challengespringbackend.domain.repository.PersonageMovieDtoRepository;
 import com.nedacort.challengespringbackend.persistence.crud.PersonajeCrudRepository;
 import com.nedacort.challengespringbackend.persistence.entity.Personaje;
-import com.nedacort.challengespringbackend.persistence.mapper.PersonageDto1Mapper;
+import com.nedacort.challengespringbackend.persistence.mapper.PersonageDtoLimitedMapper;
 import com.nedacort.challengespringbackend.persistence.mapper.PersonageDtoMapper;
 import com.nedacort.challengespringbackend.persistence.mapper.PersonageMovieDtoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +18,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public class PersonageRepository implements PersonageDtoRepository, PersonageDto1Repository, PersonageMovieDtoRepository {
+public class PersonageRepository implements PersonageDtoRepository, PersonageDtoLimitedRepository, PersonageMovieDtoRepository {
 
     @Autowired
     private PersonajeCrudRepository personajeCrudRepository;
@@ -28,7 +27,7 @@ public class PersonageRepository implements PersonageDtoRepository, PersonageDto
     private PersonageDtoMapper personageDtoMapper;
 
     @Autowired
-    private PersonageDto1Mapper personageDto1Mapper;
+    private PersonageDtoLimitedMapper personageDtoLimitedMapper;
 
     @Autowired
     private PersonageMovieDtoMapper personageMovieDtoMapper;
@@ -39,8 +38,8 @@ public class PersonageRepository implements PersonageDtoRepository, PersonageDto
     }
 
     @Override
-    public List<PersonageDto1> getAllNameAndImage() {
-        return personageDto1Mapper.toPersonageDto1S((List<Personaje>) personajeCrudRepository.findAll());
+    public List<PersonageDtoLimited> getAllLimited() {
+        return personageDtoLimitedMapper.toPersonageDto1S((List<Personaje>) personajeCrudRepository.findAll());
     }
 
     @Override
@@ -61,7 +60,7 @@ public class PersonageRepository implements PersonageDtoRepository, PersonageDto
 
 
     @Override
-    public Optional<List<PersonageMovieDto>> findAllPersonajesAndPeliculas() {
+    public Optional<List<PersonageDtoDetail>> findAllPersonajesAndPeliculas() {
 
         return Optional.empty();
     }

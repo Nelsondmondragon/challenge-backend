@@ -12,7 +12,6 @@ public interface PersonageDtoRepository {
 
     Optional<PersonageDto> getPersonageById(Integer id);
 
-
     PersonageDto save(PersonageDto personageDto);
 
     void delete(Integer id);

@@ -5,11 +5,9 @@ import lombok.Data;
 import java.time.LocalDateTime;
 
 @Data
-public class MovieDto {
-    private Integer id;
+public class MovieDtoLimited {
+
     private byte[] image;
     private String tittle;
     private LocalDateTime creationDate;
-    private Integer idQualification;
-    private Integer idGenus;
 }

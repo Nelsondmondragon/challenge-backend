@@ -1,13 +1,11 @@
 package com.nedacort.challengespringbackend.domain.service;
 
 import com.nedacort.challengespringbackend.domain.PersonageDto;
-import com.nedacort.challengespringbackend.domain.PersonageDto1;
-import com.nedacort.challengespringbackend.domain.PersonageMovieDto;
-import com.nedacort.challengespringbackend.domain.repository.PersonageDto1Repository;
+import com.nedacort.challengespringbackend.domain.PersonageDtoDetail;
+import com.nedacort.challengespringbackend.domain.PersonageDtoLimited;
+import com.nedacort.challengespringbackend.domain.repository.PersonageDtoLimitedRepository;
 import com.nedacort.challengespringbackend.domain.repository.PersonageDtoRepository;
 import com.nedacort.challengespringbackend.domain.repository.PersonageMovieDtoRepository;
-import com.nedacort.challengespringbackend.persistence.entity.Personaje;
-import com.nedacort.challengespringbackend.persistence.mapper.PersonageMovieDtoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +19,7 @@ public class PersonageService {
     private PersonageDtoRepository personageDtoRepository;
 
     @Autowired
-    private PersonageDto1Repository personageDto1Repository;
+    private PersonageDtoLimitedRepository personageDtoLimitedRepository;
 
     @Autowired
     private PersonageMovieDtoRepository personageMovieDtoRepository;
@@ -30,12 +28,12 @@ public class PersonageService {
         return personageDtoRepository.getAll();
     }
 
-    Optional<List<PersonageMovieDto>> findAllPersonajesAndPeliculas() {
+    Optional<List<PersonageDtoDetail>> findAllPersonajesAndPeliculas() {
         return personageMovieDtoRepository.findAllPersonajesAndPeliculas();
     }
 
-    public List<PersonageDto1> getAllNameAndImage() {
-        return personageDto1Repository.getAllNameAndImage();
+    public List<PersonageDtoLimited> getAllNameAndImage() {
+        return personageDtoLimitedRepository.getAllLimited();
     }
 
     public Optional<PersonageDto> getPersonageById(Integer id) {

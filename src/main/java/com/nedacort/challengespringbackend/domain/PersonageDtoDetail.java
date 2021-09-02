@@ -3,7 +3,7 @@ package com.nedacort.challengespringbackend.domain;
 import lombok.Data;
 
 @Data
-public class PersonageMovieDto {
+public class PersonageDtoDetail {
     private Integer id;
     private String name;
     private byte[] image;
