@@ -9,4 +9,11 @@ import java.util.Optional;
 public interface PersonageMovieDtoRepository {
 
     Optional<List<PersonageMovieDto>> findAllPersonagesAndMovies();
+
+    Optional<List<PersonageMovieDto>> findAllByName(String name);
+
+    Optional<List<PersonageMovieDto>> findAllByAge(Integer age);
+
+
+    Optional<List<PersonageMovieDto>> findAllByIdMovie(Integer id);
 }

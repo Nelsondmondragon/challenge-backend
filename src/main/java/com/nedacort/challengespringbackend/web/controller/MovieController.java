@@ -32,7 +32,7 @@ public class MovieController {
     }
 
     @GetMapping
-    private ResponseEntity<List<MovieDto>> getByName(@RequestParam(value = "name", required = false) String name, @RequestParam(value = "genre", required = false) Integer id
+    private ResponseEntity<List<MovieDto>> getSearch(@RequestParam(value = "name", required = false) String name, @RequestParam(value = "genre", required = false) Integer id
             , @RequestParam(value = "order", required = false) String order) {
         Optional<List<MovieDto>> optional = null;
         if (name != null && id == null && order == null) {

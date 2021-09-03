@@ -42,6 +42,19 @@ public class PersonageService {
     }
 
 
+
+    public Optional<List<PersonageMovieDto>> findAllByName(String name) {
+        return personageMovieDtoRepository.findAllByName(name);
+    }
+
+    public Optional<List<PersonageMovieDto>> findAllByAge(Integer age) {
+        return personageMovieDtoRepository.findAllByAge(age);
+    }
+
+    public Optional<List<PersonageMovieDto>> findAllByIdMovie(Integer id) {
+        return personageMovieDtoRepository.findAllByIdMovie(id);
+    }
+
     public PersonageDto save(PersonageDto personageDto) {
         return personageDtoRepository.save(personageDto);
     }

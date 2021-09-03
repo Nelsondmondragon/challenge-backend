@@ -61,6 +61,25 @@ public class PersonageRepository implements PersonageDtoRepository, PersonageDto
     }
 
     @Override
+    public Optional<List<PersonageMovieDto>> findAllByName(String name) {
+        return personajePeliculaCrudRepository.findAllByNombre(name)
+                .map(personajePeliculas -> personageMovieDtoMapper.toPersonageMovieDtos(personajePeliculas));
+    }
+
+    @Override
+    public Optional<List<PersonageMovieDto>> findAllByAge(Integer age) {
+        return personajePeliculaCrudRepository.findAllByEdad(age)
+                .map(personajePeliculas -> personageMovieDtoMapper.toPersonageMovieDtos(personajePeliculas));
+    }
+
+
+    @Override
+    public Optional<List<PersonageMovieDto>> findAllByIdMovie(Integer id) {
+        return personajePeliculaCrudRepository.findAllByIdPelicula(id)
+                .map(personajePeliculas -> personageMovieDtoMapper.toPersonageMovieDtos(personajePeliculas));
+    }
+
+    @Override
     public PersonageDto save(PersonageDto personageDto) {
         return personageDtoMapper.toPersonageDto(personajeCrudRepository.save(personageDtoMapper.toPersonaje(personageDto)));
     }
