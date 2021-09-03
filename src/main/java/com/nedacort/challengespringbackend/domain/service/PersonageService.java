@@ -3,6 +3,7 @@ package com.nedacort.challengespringbackend.domain.service;
 import com.nedacort.challengespringbackend.domain.PersonageDto;
 import com.nedacort.challengespringbackend.domain.PersonageDtoDetail;
 import com.nedacort.challengespringbackend.domain.PersonageDtoLimited;
+import com.nedacort.challengespringbackend.domain.PersonageMovieDto;
 import com.nedacort.challengespringbackend.domain.repository.PersonageDtoLimitedRepository;
 import com.nedacort.challengespringbackend.domain.repository.PersonageDtoRepository;
 import com.nedacort.challengespringbackend.domain.repository.PersonageMovieDtoRepository;
@@ -28,8 +29,8 @@ public class PersonageService {
         return personageDtoRepository.getAll();
     }
 
-    Optional<List<PersonageDtoDetail>> findAllPersonajesAndPeliculas() {
-        return personageMovieDtoRepository.findAllPersonajesAndPeliculas();
+    public Optional<List<PersonageMovieDto>> getAllPersonagesAndMovies() {
+        return personageMovieDtoRepository.findAllPersonagesAndMovies();
     }
 
     public List<PersonageDtoLimited> getAllNameAndImage() {

@@ -10,5 +10,5 @@ public class PersonageDtoDetail {
     private Integer age;
     private String history;
     private Integer peso;
-    private String title;
+    private PersonageMovieDto personageMovieDto;
 }

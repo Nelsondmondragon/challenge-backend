@@ -3,10 +3,12 @@ package com.nedacort.challengespringbackend.persistence;
 import com.nedacort.challengespringbackend.domain.PersonageDto;
 import com.nedacort.challengespringbackend.domain.PersonageDtoDetail;
 import com.nedacort.challengespringbackend.domain.PersonageDtoLimited;
+import com.nedacort.challengespringbackend.domain.PersonageMovieDto;
 import com.nedacort.challengespringbackend.domain.repository.PersonageDtoLimitedRepository;
 import com.nedacort.challengespringbackend.domain.repository.PersonageDtoRepository;
 import com.nedacort.challengespringbackend.domain.repository.PersonageMovieDtoRepository;
 import com.nedacort.challengespringbackend.persistence.crud.PersonajeCrudRepository;
+import com.nedacort.challengespringbackend.persistence.crud.PersonajePeliculaCrudRepository;
 import com.nedacort.challengespringbackend.persistence.entity.Personaje;
 import com.nedacort.challengespringbackend.persistence.mapper.PersonageDtoLimitedMapper;
 import com.nedacort.challengespringbackend.persistence.mapper.PersonageDtoMapper;
@@ -22,6 +24,9 @@ public class PersonageRepository implements PersonageDtoRepository, PersonageDto
 
     @Autowired
     private PersonajeCrudRepository personajeCrudRepository;
+
+    @Autowired
+    private PersonajePeliculaCrudRepository personajePeliculaCrudRepository;
 
     @Autowired
     private PersonageDtoMapper personageDtoMapper;
@@ -49,6 +54,13 @@ public class PersonageRepository implements PersonageDtoRepository, PersonageDto
     }
 
     @Override
+    public Optional<List<PersonageMovieDto>> findAllPersonagesAndMovies() {
+
+        return personajePeliculaCrudRepository.findAllPersonajesAndPeliculas()
+                .map(personajePeliculas -> personageMovieDtoMapper.toPersonageMovieDtos(personajePeliculas));
+    }
+
+    @Override
     public PersonageDto save(PersonageDto personageDto) {
         return personageDtoMapper.toPersonageDto(personajeCrudRepository.save(personageDtoMapper.toPersonaje(personageDto)));
     }
@@ -59,9 +71,4 @@ public class PersonageRepository implements PersonageDtoRepository, PersonageDto
     }
 
 
-    @Override
-    public Optional<List<PersonageDtoDetail>> findAllPersonajesAndPeliculas() {
-
-        return Optional.empty();
-    }
 }

@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public class MovieDetailRepository implements MovieDtoLimitedRepository, MovieDtoDetailRepository, MovieDtoRepository {
+public class MovieRepository implements MovieDtoLimitedRepository, MovieDtoDetailRepository, MovieDtoRepository {
 
     @Autowired
     private PeliculaCrudRepository peliculaCrudRepository;

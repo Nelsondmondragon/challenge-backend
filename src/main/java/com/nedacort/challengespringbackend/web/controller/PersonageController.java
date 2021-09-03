@@ -2,6 +2,7 @@ package com.nedacort.challengespringbackend.web.controller;
 
 import com.nedacort.challengespringbackend.domain.PersonageDto;
 import com.nedacort.challengespringbackend.domain.PersonageDtoLimited;
+import com.nedacort.challengespringbackend.domain.PersonageMovieDto;
 import com.nedacort.challengespringbackend.domain.service.PersonageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,6 +25,12 @@ public class PersonageController {
         return new ResponseEntity<>(personageService.getAllNameAndImage(), HttpStatus.OK);
     }
 
+    @GetMapping("detail")
+    private ResponseEntity<List<PersonageMovieDto>> getAllByPersonageAndMovie() {
+        return personageService.getAllPersonagesAndMovies()
+                .map(personageMovieDtos -> new ResponseEntity<>(personageMovieDtos, HttpStatus.OK))
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
 
     @PostMapping("/save")
     public ResponseEntity<PersonageDto> save(@RequestBody PersonageDto personageDto) {
