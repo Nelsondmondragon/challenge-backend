@@ -49,6 +49,30 @@ public class MovieDetailRepository implements MovieDtoLimitedRepository, MovieDt
     }
 
     @Override
+    public Optional<List<MovieDto>> getByName(String name) {
+        return peliculaCrudRepository.findByName(name)
+                .map(peliculas -> movieDtoMapper.toMovieDtos(peliculas));
+    }
+
+    @Override
+    public Optional<List<MovieDto>> getByIdGenre(Integer id) {
+        return peliculaCrudRepository.findByIdGenero(id)
+                .map(peliculas -> movieDtoMapper.toMovieDtos(peliculas));
+    }
+
+    @Override
+    public Optional<List<MovieDto>> findAllByCreationDateDesc() {
+        return peliculaCrudRepository.findAllByFechaCreacionDesc()
+                .map(peliculas -> movieDtoMapper.toMovieDtos(peliculas));
+    }
+
+    @Override
+    public Optional<List<MovieDto>> findAllByCreationDateAsc() {
+        return peliculaCrudRepository.findAllFechaCreacionAsc()
+                .map(peliculas -> movieDtoMapper.toMovieDtos(peliculas));
+    }
+
+    @Override
     public MovieDto save(MovieDto movieDto) {
         return movieDtoMapper.toMovieDto(peliculaCrudRepository.save(movieDtoMapper.toPelicula(movieDto)));
     }

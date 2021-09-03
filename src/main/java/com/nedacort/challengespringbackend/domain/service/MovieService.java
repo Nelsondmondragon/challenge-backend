@@ -36,6 +36,21 @@ public class MovieService {
         return movieDtoRepository.getById(id);
     }
 
+    public Optional<List<MovieDto>> getByName(String name) {
+        return movieDtoRepository.getByName(name);
+    }
+
+    public Optional<List<MovieDto>> getByIdGenre(Integer id) {
+        return movieDtoRepository.getByIdGenre(id);
+    }
+
+    public Optional<List<MovieDto>> findAllByCreationDateDesc() {
+        return movieDtoRepository.findAllByCreationDateDesc();
+    }
+
+    public Optional<List<MovieDto>> findAllByCreationDateAsc() {
+        return movieDtoRepository.findAllByCreationDateAsc();
+    }
 
     public MovieDto save(MovieDto movieDto) {
         return movieDtoRepository.save(movieDto);

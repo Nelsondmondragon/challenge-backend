@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/movies")
@@ -28,6 +29,27 @@ public class MovieController {
     @GetMapping("/detail")
     private ResponseEntity<List<MovieDtoDetail>> getAllP() {
         return new ResponseEntity<>(movieService.getAllDetails(), HttpStatus.OK);
+    }
+
+    @GetMapping
+    private ResponseEntity<List<MovieDto>> getByName(@RequestParam(value = "name", required = false) String name, @RequestParam(value = "genre", required = false) Integer id
+            , @RequestParam(value = "order", required = false) String order) {
+        Optional<List<MovieDto>> optional = null;
+        if (name != null && id == null && order == null) {
+            optional = movieService.getByName(name);
+        }
+        if (name == null && id != null && order == null) {
+            optional = movieService.getByIdGenre(id);
+        }
+        if (name == null && id == null && order != null) {
+            if (order.equalsIgnoreCase("desc")) {
+                optional = movieService.findAllByCreationDateDesc();
+            }else{
+                optional = movieService.findAllByCreationDateAsc();
+            }
+        }
+        return optional.map(movieDtos -> new ResponseEntity<>(movieDtos, HttpStatus.OK))
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @PostMapping("/save")

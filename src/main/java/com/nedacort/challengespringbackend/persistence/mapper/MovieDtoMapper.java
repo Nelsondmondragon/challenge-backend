@@ -7,6 +7,8 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 
+import java.util.List;
+
 @Mapper(componentModel = "spring")
 public interface MovieDtoMapper {
 
@@ -18,7 +20,7 @@ public interface MovieDtoMapper {
             @Mapping(source = "idCalificacion", target = "idQualification")
     })
     MovieDto toMovieDto(Pelicula pelicula);
-
+    List<MovieDto> toMovieDtos(List<Pelicula> peliculas);
 
     @InheritInverseConfiguration
     @Mapping(target = "genero", ignore = true)
