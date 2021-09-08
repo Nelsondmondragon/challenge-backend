@@ -1,8 +1,9 @@
 package com.nedacort.challengespringbackend.web.controller;
 
-import com.nedacort.challengespringbackend.domain.dto.AuthenticationRequest;
+import com.nedacort.challengespringbackend.domain.UserDto;
 import com.nedacort.challengespringbackend.domain.dto.AuthenticationResponse;
 import com.nedacort.challengespringbackend.domain.service.UserDetailService;
+import com.nedacort.challengespringbackend.persistence.crud.UserCrudRepository;
 import com.nedacort.challengespringbackend.web.security.JWTUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,13 +25,16 @@ public class AuthController {
     private AuthenticationManager authenticationManager;
 
     @Autowired
+    private UserCrudRepository userCrudRepository;
+
+    @Autowired
     private UserDetailService userDetailService;
 
     @Autowired
     private JWTUtil jwtUtil;
 
     @PostMapping("/login")
-    public ResponseEntity<AuthenticationResponse> createToken(@RequestBody AuthenticationRequest request) {
+    public ResponseEntity<AuthenticationResponse> createToken(@RequestBody UserDto request) {
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken
                     (request.getUsername(), request.getPassword()));
