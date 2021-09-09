@@ -1,5 +1,6 @@
 package com.nedacort.challengespringbackend.web.controller;
 
+import com.nedacort.challengespringbackend.domain.MovieDto;
 import com.nedacort.challengespringbackend.domain.UserDto;
 import com.nedacort.challengespringbackend.domain.dto.AuthenticationResponse;
 import com.nedacort.challengespringbackend.domain.service.UserDetailService;
@@ -12,20 +13,17 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
 
     @Autowired
-    private AuthenticationManager authenticationManager;
-
+    private PasswordEncoder passwordEncoder;
     @Autowired
-    private UserCrudRepository userCrudRepository;
+    private AuthenticationManager authenticationManager;
 
     @Autowired
     private UserDetailService userDetailService;
@@ -44,6 +42,11 @@ public class AuthController {
         } catch (BadCredentialsException e) {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
         }
+    }
+
+    @PostMapping("/register")
+    public ResponseEntity<UserDto> save(@RequestBody UserDto userDto) {
+        return new ResponseEntity<>(userDetailService.save(userDto), HttpStatus.CREATED);
     }
 
 

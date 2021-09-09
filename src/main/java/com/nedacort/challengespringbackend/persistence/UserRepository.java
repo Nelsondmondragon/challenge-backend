@@ -23,4 +23,9 @@ public class UserRepository implements UserDtoRepository {
         return userCrudRepository.findByUsername(username)
                 .map(user -> userDtoMapper.toUserDto(user));
     }
+
+    @Override
+    public UserDto save(UserDto userDto) {
+        return userDtoMapper.toUserDto(userCrudRepository.save(userDtoMapper.toUser(userDto)));
+    }
 }

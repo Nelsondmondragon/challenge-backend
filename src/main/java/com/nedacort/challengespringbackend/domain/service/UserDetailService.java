@@ -8,25 +8,29 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 
 @Service
 public class UserDetailService implements UserDetailsService {
 
-    private final static String USER_NOT_FOUND_MSG =
-            "user with username %s not found";
-
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
     private UserDtoRepository userDtoRepository;
 
-
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         UserDto userDto = userDtoRepository.getByUsername(username).get();
-        
-        return new User(userDto.getUsername(), userDto.getEmail(), "{noop}" + userDto.getPassword(),
+        return new User(userDto.getUsername(), userDto.getEmail(), userDto.getPassword(),
                 userDto.getRol(), userDto.getLocked(), userDto.getEnable());
+    }
+
+    public UserDto save(UserDto userDto) {
+        userDto.setPassword(bCryptPasswordEncoder.encode(userDto.getPassword()));
+        return userDtoRepository.save(userDto);
     }
 }

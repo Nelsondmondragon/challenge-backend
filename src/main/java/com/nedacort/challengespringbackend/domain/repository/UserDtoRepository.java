@@ -6,4 +6,6 @@ import java.util.Optional;
 
 public interface UserDtoRepository {
     Optional<UserDto> getByUsername(String username);
+
+    UserDto save(UserDto userDto);
 }
