@@ -2,6 +2,7 @@ package com.nedacort.challengespringbackend.domain.service;
 
 import com.nedacort.challengespringbackend.domain.UserDto;
 import com.nedacort.challengespringbackend.domain.repository.UserDtoRepository;
+import com.nedacort.challengespringbackend.email.EmailSender;
 import com.nedacort.challengespringbackend.persistence.entity.User;
 import com.nedacort.challengespringbackend.persistence.entity.UserDetail;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,9 @@ public class UserDetailService implements UserDetailsService {
     @Autowired
     private UserDtoRepository userDtoRepository;
 
+    @Autowired
+    private EmailSender emailSender;
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         UserDto userDto = userDtoRepository.getByUsername(username).get();
@@ -30,6 +34,7 @@ public class UserDetailService implements UserDetailsService {
     }
 
     public UserDto save(UserDto userDto) {
+        emailSender.send(userDto.getEmail(), "<h1>welcome</h1>");
         userDto.setPassword(bCryptPasswordEncoder.encode(userDto.getPassword()));
         return userDtoRepository.save(userDto);
     }
