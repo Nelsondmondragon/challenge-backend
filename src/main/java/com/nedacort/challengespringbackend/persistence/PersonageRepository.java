@@ -55,7 +55,6 @@ public class PersonageRepository implements PersonageDtoRepository, PersonageDto
 
     @Override
     public Optional<List<PersonageMovieDto>> findAllPersonagesAndMovies() {
-
         return personajePeliculaCrudRepository.findAllPersonajesAndPeliculas()
                 .map(personajePeliculas -> personageMovieDtoMapper.toPersonageMovieDtos(personajePeliculas));
     }

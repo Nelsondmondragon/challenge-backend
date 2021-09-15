@@ -14,6 +14,5 @@ public interface PersonageMovieDtoRepository {
 
     Optional<List<PersonageMovieDto>> findAllByAge(Integer age);
 
-
     Optional<List<PersonageMovieDto>> findAllByIdMovie(Integer id);
 }

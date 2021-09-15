@@ -9,6 +9,7 @@ import org.mapstruct.Mapper;
 public interface UserDtoMapper {
 
     UserDto toUserDto(User user);
+
     @InheritInverseConfiguration
     User toUser(UserDto userDto);
 }

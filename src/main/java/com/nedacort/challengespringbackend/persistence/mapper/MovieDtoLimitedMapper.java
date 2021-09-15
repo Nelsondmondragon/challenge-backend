@@ -17,6 +17,7 @@ public interface MovieDtoLimitedMapper {
             @Mapping(source = "fechaCreacion", target = "creationDate")
     })
     MovieDtoLimited toMovieDto1(Pelicula pelicula);
+
     List<MovieDtoLimited> toMovieDto1S(List<Pelicula> peliculas);
 
 

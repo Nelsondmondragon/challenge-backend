@@ -6,6 +6,9 @@ import com.nedacort.challengespringbackend.domain.dto.AuthenticationResponse;
 import com.nedacort.challengespringbackend.domain.service.UserDetailService;
 import com.nedacort.challengespringbackend.persistence.crud.UserCrudRepository;
 import com.nedacort.challengespringbackend.web.security.JWTUtil;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,6 +35,7 @@ public class AuthController {
     private JWTUtil jwtUtil;
 
     @PostMapping("/login")
+    @ApiOperation(value = "Inicio de Sesion generando JWT")
     public ResponseEntity<AuthenticationResponse> createToken(@RequestBody UserDto request) {
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken
@@ -45,6 +49,9 @@ public class AuthController {
     }
 
     @PostMapping("/register")
+    @ApiOperation(value = "Creacion de un Usuario")
+    @ApiResponses(value = {@ApiResponse(code = 201, message = "Usuario Creado"),
+            @ApiResponse(code = 400, message = "peticion invalida")})
     public ResponseEntity<UserDto> save(@RequestBody UserDto userDto) {
         return new ResponseEntity<>(userDetailService.save(userDto), HttpStatus.CREATED);
     }

@@ -3,9 +3,10 @@ package com.nedacort.challengespringbackend.domain.service;
 import com.nedacort.challengespringbackend.domain.MovieDto;
 import com.nedacort.challengespringbackend.domain.MovieDtoDetail;
 import com.nedacort.challengespringbackend.domain.MovieDtoLimited;
+import com.nedacort.challengespringbackend.domain.MoviePersonageDto;
 import com.nedacort.challengespringbackend.domain.repository.MovieDtoLimitedRepository;
-import com.nedacort.challengespringbackend.domain.repository.MovieDtoDetailRepository;
 import com.nedacort.challengespringbackend.domain.repository.MovieDtoRepository;
+import com.nedacort.challengespringbackend.domain.repository.MoviePersonageDtoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,13 +20,13 @@ public class MovieService {
     private MovieDtoLimitedRepository movieDtoLimitedRepository;
 
     @Autowired
-    private MovieDtoDetailRepository movieDtoDetailRepository;
+    private MoviePersonageDtoRepository moviePersonageDtoRepository;
 
     @Autowired
     private MovieDtoRepository movieDtoRepository;
 
-    public List<MovieDtoDetail> getAllDetails() {
-        return movieDtoDetailRepository.getAllDetails();
+    public Optional<List<MoviePersonageDto>> getAllMovieAndPersonage() {
+        return moviePersonageDtoRepository.findAllMoviesAndPersonage();
     }
 
     public List<MovieDtoLimited> getAllLimited() {

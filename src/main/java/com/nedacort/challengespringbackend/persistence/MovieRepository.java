@@ -1,16 +1,19 @@
 package com.nedacort.challengespringbackend.persistence;
 
 import com.nedacort.challengespringbackend.domain.MovieDto;
-import com.nedacort.challengespringbackend.domain.MovieDtoDetail;
 import com.nedacort.challengespringbackend.domain.MovieDtoLimited;
+import com.nedacort.challengespringbackend.domain.MoviePersonageDto;
+import com.nedacort.challengespringbackend.domain.PersonageMovieDto;
 import com.nedacort.challengespringbackend.domain.repository.MovieDtoLimitedRepository;
-import com.nedacort.challengespringbackend.domain.repository.MovieDtoDetailRepository;
 import com.nedacort.challengespringbackend.domain.repository.MovieDtoRepository;
+import com.nedacort.challengespringbackend.domain.repository.MoviePersonageDtoRepository;
 import com.nedacort.challengespringbackend.persistence.crud.PeliculaCrudRepository;
+import com.nedacort.challengespringbackend.persistence.crud.PersonajePeliculaCrudRepository;
 import com.nedacort.challengespringbackend.persistence.entity.Pelicula;
 import com.nedacort.challengespringbackend.persistence.mapper.MovieDtoLimitedMapper;
-import com.nedacort.challengespringbackend.persistence.mapper.MovieDtoDetailsMapper;
 import com.nedacort.challengespringbackend.persistence.mapper.MovieDtoMapper;
+import com.nedacort.challengespringbackend.persistence.mapper.MoviePersonageDtoMapper;
+import com.nedacort.challengespringbackend.persistence.mapper.PersonageMovieDtoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -18,28 +21,29 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public class MovieRepository implements MovieDtoLimitedRepository, MovieDtoDetailRepository, MovieDtoRepository {
+public class MovieRepository implements MovieDtoLimitedRepository, MovieDtoRepository, MoviePersonageDtoRepository {
 
     @Autowired
     private PeliculaCrudRepository peliculaCrudRepository;
 
     @Autowired
+    private PersonajePeliculaCrudRepository personajePeliculaCrudRepository;
+
+    @Autowired
     private MovieDtoLimitedMapper movieDtoLimitedMapper;
 
     @Autowired
-    private MovieDtoDetailsMapper movieDtoDetailsMapper;
+    PersonageMovieDtoMapper personageMovieDtoMapper;
 
     @Autowired
     private MovieDtoMapper movieDtoMapper;
 
+    @Autowired
+    private MoviePersonageDtoMapper moviePersonageDtoMapper;
+
     @Override
     public List<MovieDtoLimited> getAllLimited() {
         return movieDtoLimitedMapper.toMovieDto1S((List<Pelicula>) peliculaCrudRepository.findAll());
-    }
-
-    @Override
-    public List<MovieDtoDetail> getAllDetails() {
-        return movieDtoDetailsMapper.toMovieDtos((List<Pelicula>) peliculaCrudRepository.findAll());
     }
 
     @Override
@@ -80,5 +84,11 @@ public class MovieRepository implements MovieDtoLimitedRepository, MovieDtoDetai
     @Override
     public void delete(Integer id) {
         peliculaCrudRepository.deleteById(id);
+    }
+
+    @Override
+    public Optional<List<MoviePersonageDto>> findAllMoviesAndPersonage() {
+        return personajePeliculaCrudRepository.findAllPersonajesAndPeliculas()
+                .map(personajePeliculas -> moviePersonageDtoMapper.toMoviePersonageDtos(personajePeliculas));
     }
 }
