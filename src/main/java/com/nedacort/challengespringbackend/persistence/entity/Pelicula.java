@@ -12,9 +12,10 @@ import java.util.List;
 import java.util.Objects;
 
 @Data
-@Entity
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@Entity
 @Table(name = "peliculas")
 public class Pelicula {
 
@@ -57,7 +58,6 @@ public class Pelicula {
         this.idGenero = idGenero;
         this.idCalificacion = idCalificacion;
     }
-
 
 
     @Override

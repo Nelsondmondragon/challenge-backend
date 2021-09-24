@@ -6,8 +6,6 @@ import com.nedacort.challengespringbackend.persistence.entity.Pelicula;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.jdbc.EmbeddedDatabaseConnection;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import java.time.LocalDate;
@@ -31,19 +29,20 @@ class PeliculaCrudRepositoryTest {
     @BeforeAll
     static void initAll() {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy", Locale.US);
-        pelicula = new Pelicula(
-                2,
-                "It",
-                LocalDate.parse("10/08/2008", dateTimeFormatter).atStartOfDay(),
-                1,
-                4);
-        pelicula1 = new Pelicula(
-                1,
-                "Conjuro",
-                LocalDate.parse("10/08/2009", dateTimeFormatter).atStartOfDay(),
-                1,
-                3
-        );
+        pelicula = Pelicula.builder()
+                .id(2)
+                .titulo("It")
+                .fechaCreacion(LocalDate.parse("10/08/2008", dateTimeFormatter).atStartOfDay())
+                .idGenero(1)
+                .idCalificacion(4)
+                .build();
+        pelicula1 = Pelicula.builder()
+                .id(1)
+                .titulo("Conjuro")
+                .fechaCreacion(LocalDate.parse("10/08/2009", dateTimeFormatter).atStartOfDay())
+                .idGenero(1)
+                .idCalificacion(3)
+                .build();
     }
 
     @Test

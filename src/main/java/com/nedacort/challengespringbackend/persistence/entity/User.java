@@ -1,9 +1,7 @@
 package com.nedacort.challengespringbackend.persistence.entity;
 
 import com.nedacort.challengespringbackend.persistence.enums.UserRole;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,6 +12,8 @@ import java.util.Collections;
 
 @Data
 @EqualsAndHashCode
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name = "usuarios")
