@@ -70,7 +70,8 @@ references peliculas(id);
 
 
 
-insert into personajes(id,nombre, edad,peso, historia)values (1,'Nelson', 21,12, 'Persona con historia normal');
+insert into personajes(id,nombre, edad,peso, historia)
+values (1,'Nelson', 21,12, 'Persona con historia normal');
 
 insert into personajes(id,nombre,  edad,peso, historia)
 values (2,'Gustavo',  27, 12,'Persona con historia triste');
@@ -124,6 +125,9 @@ insert into personajes_peliculas(id_pelicula,id_personaje)
 values (1,1);
 insert into personajes_peliculas(id_pelicula,id_personaje)
 values (2,2);
+
+insert into personajes_peliculas(id_pelicula,id_personaje)
+values (2,3);
 
 
 
