@@ -3,10 +3,12 @@ package com.nedacort.challengespringbackend.persistence.crud;
 import com.nedacort.challengespringbackend.persistence.entity.Pelicula;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
 
+@Repository
 public interface PeliculaCrudRepository extends CrudRepository<Pelicula, Integer> {
 
 
@@ -32,5 +34,5 @@ public interface PeliculaCrudRepository extends CrudRepository<Pelicula, Integer
             "peliculas.id_genero, peliculas.id_calificacion\n" +
             "from peliculas\n" +
             "order by 4 asc", nativeQuery = true)
-    Optional<List<Pelicula>> findAllFechaCreacionAsc();
+    Optional<List<Pelicula>> findAllByFechaCreacionAsc();
 }

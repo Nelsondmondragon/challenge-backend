@@ -29,13 +29,13 @@ public class MovieController {
     @ApiOperation(value = "Listado de peliculas con los campos imagen, titulo" +
             "y fecha de creacion")
     @ApiResponse(code = 201, message = "OK")
-    private ResponseEntity<List<MovieDtoLimited>> getAll() {
+    public ResponseEntity<List<MovieDtoLimited>> getAll() {
         return new ResponseEntity<>(movieService.getAllLimited(), HttpStatus.OK);
     }
 
     @GetMapping("/detail")
     @ApiOperation(value = "Listado de Peliculas junto a sus personajes asociados")
-    private ResponseEntity<List<MoviePersonageDto>> getAllP() {
+    public ResponseEntity<List<MoviePersonageDto>> getAllP() {
         return new ResponseEntity<>(movieService.getAllMovieAndPersonage().get(), HttpStatus.OK);
     }
 
@@ -44,7 +44,7 @@ public class MovieController {
             "las peliculas en las que participo ")
     @ApiResponses(value = {@ApiResponse(code = 201, message = "OK"),
             @ApiResponse(code = 400, message = "Peticion invalida")})
-    private ResponseEntity<List<MovieDto>> getSearch(@RequestParam(value = "name", required = false) String name, @RequestParam(value = "genre", required = false) Integer id
+    public ResponseEntity<List<MovieDto>> getSearch(@RequestParam(value = "name", required = false) String name, @RequestParam(value = "genre", required = false) Integer id
             , @RequestParam(value = "order", required = false) String order) {
         Optional<List<MovieDto>> optional = null;
         if (name != null && id == null && order == null) {

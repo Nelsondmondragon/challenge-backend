@@ -3,7 +3,6 @@ package com.nedacort.challengespringbackend.persistence;
 import com.nedacort.challengespringbackend.domain.MovieDto;
 import com.nedacort.challengespringbackend.domain.MovieDtoLimited;
 import com.nedacort.challengespringbackend.domain.MoviePersonageDto;
-import com.nedacort.challengespringbackend.domain.PersonageMovieDto;
 import com.nedacort.challengespringbackend.domain.repository.MovieDtoLimitedRepository;
 import com.nedacort.challengespringbackend.domain.repository.MovieDtoRepository;
 import com.nedacort.challengespringbackend.domain.repository.MoviePersonageDtoRepository;
@@ -72,7 +71,7 @@ public class MovieRepository implements MovieDtoLimitedRepository, MovieDtoRepos
 
     @Override
     public Optional<List<MovieDto>> findAllByCreationDateAsc() {
-        return peliculaCrudRepository.findAllFechaCreacionAsc()
+        return peliculaCrudRepository.findAllByFechaCreacionAsc()
                 .map(peliculas -> movieDtoMapper.toMovieDtos(peliculas));
     }
 
