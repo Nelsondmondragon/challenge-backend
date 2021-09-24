@@ -1,10 +1,16 @@
 package com.nedacort.challengespringbackend.persistence.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "personajes_peliculas")
 public class PersonajePelicula {
@@ -19,4 +25,7 @@ public class PersonajePelicula {
     @ManyToOne
     @JoinColumn(name = "id_pelicula", insertable = false, updatable = false)
     private Pelicula pelicula;
+
+
+
 }
