@@ -8,7 +8,6 @@ import java.util.Optional;
 
 public interface PersonageDtoRepository {
 
-    List<PersonageDto> getAll();
 
     Optional<PersonageDto> getPersonageById(Integer id);
 

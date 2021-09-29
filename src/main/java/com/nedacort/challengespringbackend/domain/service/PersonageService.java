@@ -31,9 +31,6 @@ public class PersonageService {
     @Autowired
     private PersonageMovieDtoRepository personageMovieDtoRepository;
 
-    public List<PersonageDto> getAll() {
-        return personageDtoRepository.getAll();
-    }
 
     public Optional<List<PersonageMovieDto>> getAllPersonagesAndMovies() {
         return personageMovieDtoRepository.findAllPersonagesAndMovies();

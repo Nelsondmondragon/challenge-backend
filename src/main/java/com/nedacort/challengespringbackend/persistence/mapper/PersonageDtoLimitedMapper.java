@@ -14,8 +14,9 @@ public interface PersonageDtoLimitedMapper {
             @Mapping(source = "nombre", target = "name"),
             @Mapping(source = "imagen", target = "image")
     })
-    PersonageDtoLimited toPersonageDto1(Personaje personaje);
-    List<PersonageDtoLimited> toPersonageDto1S(List<Personaje> personajes);
+    PersonageDtoLimited toPersonageDtoLimited(Personaje personaje);
+
+    List<PersonageDtoLimited> toPersonageDtoLimiteds(List<Personaje> personajes);
 
 
 }

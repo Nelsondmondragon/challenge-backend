@@ -1,7 +1,6 @@
 package com.nedacort.challengespringbackend.persistence;
 
 import com.nedacort.challengespringbackend.domain.PersonageDto;
-import com.nedacort.challengespringbackend.domain.PersonageDtoDetail;
 import com.nedacort.challengespringbackend.domain.PersonageDtoLimited;
 import com.nedacort.challengespringbackend.domain.PersonageMovieDto;
 import com.nedacort.challengespringbackend.domain.repository.PersonageDtoLimitedRepository;
@@ -13,6 +12,9 @@ import com.nedacort.challengespringbackend.persistence.entity.Personaje;
 import com.nedacort.challengespringbackend.persistence.mapper.PersonageDtoLimitedMapper;
 import com.nedacort.challengespringbackend.persistence.mapper.PersonageDtoMapper;
 import com.nedacort.challengespringbackend.persistence.mapper.PersonageMovieDtoMapper;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -20,6 +22,9 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class PersonageRepository implements PersonageDtoRepository, PersonageDtoLimitedRepository, PersonageMovieDtoRepository {
 
     @Autowired
@@ -38,13 +43,8 @@ public class PersonageRepository implements PersonageDtoRepository, PersonageDto
     private PersonageMovieDtoMapper personageMovieDtoMapper;
 
     @Override
-    public List<PersonageDto> getAll() {
-        return personageDtoMapper.toPersonageDtos((List<Personaje>) personajeCrudRepository.findAll());
-    }
-
-    @Override
     public List<PersonageDtoLimited> getAllLimited() {
-        return personageDtoLimitedMapper.toPersonageDto1S((List<Personaje>) personajeCrudRepository.findAll());
+        return personageDtoLimitedMapper.toPersonageDtoLimiteds((List<Personaje>) personajeCrudRepository.findAll());
     }
 
     @Override
