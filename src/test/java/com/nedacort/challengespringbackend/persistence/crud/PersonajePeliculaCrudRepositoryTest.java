@@ -1,13 +1,21 @@
 package com.nedacort.challengespringbackend.persistence.crud;
 
+
 import com.nedacort.challengespringbackend.persistence.entity.PersonajePelicula;
 import com.nedacort.challengespringbackend.persistence.entity.PersonajePeliculaPK;
 import org.assertj.core.api.Assertions;
+import com.nedacort.challengespringbackend.persistence.entity.Personaje;
+import com.nedacort.challengespringbackend.persistence.entity.PersonajePelicula;
+import com.nedacort.challengespringbackend.persistence.entity.PersonajePeliculaPK;
+import org.assertj.core.api.Assertions;
+import org.assertj.core.api.RecursiveComparisonAssert;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import java.util.Arrays;
+import java.util.Collections;
 
 
 @DataJpaTest
@@ -43,7 +51,10 @@ class PersonajePeliculaCrudRepositoryTest {
     }
 
     @Test
+
     void get_all_personages_by_name() {
+
+
         PersonajePelicula personajePelicula = PersonajePelicula
                 .builder()
                 .id(PersonajePeliculaPK.builder()
@@ -62,6 +73,7 @@ class PersonajePeliculaCrudRepositoryTest {
 
     @Test
     void get_all_personages_by_age() {
+
         PersonajePelicula personajePelicula = PersonajePelicula
                 .builder()
                 .id(PersonajePeliculaPK.builder()
@@ -77,6 +89,7 @@ class PersonajePeliculaCrudRepositoryTest {
 
     @Test
     void get_all_personages_by_movie_id() {
+
         PersonajePelicula personajePelicula = PersonajePelicula.builder()
                 .id(PersonajePeliculaPK.builder()
                         .idPelicula(2)
