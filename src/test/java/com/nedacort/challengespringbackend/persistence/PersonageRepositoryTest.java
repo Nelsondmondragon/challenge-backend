@@ -103,7 +103,7 @@ class PersonageRepositoryTest {
         personageRepository.save(personageDto);
         argumentCaptor = ArgumentCaptor.forClass(Personaje.class);
         verify(personajeCrudRepository).save(argumentCaptor.capture());
-        Assertions.assertThat(argumentCaptor.getValue().getId()).isEqualTo(personageDto.getId());
+        Assertions.assertThat(personageDto.getId()).isEqualTo(argumentCaptor.getValue().getId());
 
     }
 

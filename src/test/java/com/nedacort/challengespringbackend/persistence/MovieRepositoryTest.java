@@ -11,7 +11,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.*;
 import org.mockito.junit.jupiter.MockitoExtension;
+
 import java.time.LocalDateTime;
+
 import static org.mockito.Mockito.verify;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -101,8 +103,8 @@ class MovieRepositoryTest {
         verify(peliculaCrudRepository)
                 .save(argumentCaptor.capture());
 
-        Pelicula captureMovie = argumentCaptor.getValue();
-        Assertions.assertThat(captureMovie.getId()).isEqualTo(movieDto.getId());
+
+        Assertions.assertThat(movieDto.getId()).isEqualTo(argumentCaptor.getValue().getId());
     }
 
     @Test
