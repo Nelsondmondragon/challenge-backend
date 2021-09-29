@@ -5,6 +5,9 @@ import com.nedacort.challengespringbackend.domain.repository.UserDtoRepository;
 import com.nedacort.challengespringbackend.email.EmailSender;
 import com.nedacort.challengespringbackend.persistence.entity.User;
 import com.nedacort.challengespringbackend.persistence.entity.UserDetail;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -14,6 +17,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Service
 public class UserDetailService implements UserDetailsService {
 

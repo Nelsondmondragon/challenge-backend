@@ -7,12 +7,18 @@ import com.nedacort.challengespringbackend.domain.MoviePersonageDto;
 import com.nedacort.challengespringbackend.domain.repository.MovieDtoLimitedRepository;
 import com.nedacort.challengespringbackend.domain.repository.MovieDtoRepository;
 import com.nedacort.challengespringbackend.domain.repository.MoviePersonageDtoRepository;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Service
 public class MovieService {
 

@@ -1,17 +1,13 @@
 package com.nedacort.challengespringbackend.persistence.crud;
 
-import com.nedacort.challengespringbackend.persistence.entity.Personaje;
 import com.nedacort.challengespringbackend.persistence.entity.PersonajePelicula;
 import com.nedacort.challengespringbackend.persistence.entity.PersonajePeliculaPK;
 import org.assertj.core.api.Assertions;
-import org.assertj.core.api.RecursiveComparisonAssert;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import java.util.Arrays;
-import java.util.Collections;
 
 
 @DataJpaTest

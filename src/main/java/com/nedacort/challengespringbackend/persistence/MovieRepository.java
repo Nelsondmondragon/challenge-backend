@@ -13,6 +13,9 @@ import com.nedacort.challengespringbackend.persistence.mapper.MovieDtoLimitedMap
 import com.nedacort.challengespringbackend.persistence.mapper.MovieDtoMapper;
 import com.nedacort.challengespringbackend.persistence.mapper.MoviePersonageDtoMapper;
 import com.nedacort.challengespringbackend.persistence.mapper.PersonageMovieDtoMapper;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -20,6 +23,9 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class MovieRepository implements MovieDtoLimitedRepository, MovieDtoRepository, MoviePersonageDtoRepository {
 
     @Autowired
@@ -42,7 +48,7 @@ public class MovieRepository implements MovieDtoLimitedRepository, MovieDtoRepos
 
     @Override
     public List<MovieDtoLimited> getAllLimited() {
-        return movieDtoLimitedMapper.toMovieDto1S((List<Pelicula>) peliculaCrudRepository.findAll());
+        return movieDtoLimitedMapper.toMovieDtoLimiteds((List<Pelicula>) peliculaCrudRepository.findAll());
     }
 
     @Override

@@ -1,13 +1,10 @@
 package com.nedacort.challengespringbackend.persistence.crud;
 
 import com.nedacort.challengespringbackend.persistence.entity.Pelicula;
-
-
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -78,4 +75,6 @@ class PeliculaCrudRepositoryTest {
                 .ignoringFields("genero", "calificacion", "personajePeliculas")
                 .isEqualTo(peliculas);
     }
+
+
 }

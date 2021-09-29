@@ -7,12 +7,18 @@ import com.nedacort.challengespringbackend.domain.PersonageMovieDto;
 import com.nedacort.challengespringbackend.domain.repository.PersonageDtoLimitedRepository;
 import com.nedacort.challengespringbackend.domain.repository.PersonageDtoRepository;
 import com.nedacort.challengespringbackend.domain.repository.PersonageMovieDtoRepository;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Service
 public class PersonageService {
 
@@ -40,7 +46,6 @@ public class PersonageService {
     public Optional<PersonageDto> getPersonageById(Integer id) {
         return personageDtoRepository.getPersonageById(id);
     }
-
 
 
     public Optional<List<PersonageMovieDto>> findAllByName(String name) {
