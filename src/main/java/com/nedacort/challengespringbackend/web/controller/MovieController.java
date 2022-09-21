@@ -44,8 +44,9 @@ public class MovieController {
             "las peliculas en las que participo ")
     @ApiResponses(value = {@ApiResponse(code = 201, message = "OK"),
             @ApiResponse(code = 400, message = "Peticion invalida")})
-    public ResponseEntity<List<MovieDto>> getSearch(@RequestParam(value = "name", required = false) String name, @RequestParam(value = "genre", required = false) Integer id
-            , @RequestParam(value = "order", required = false) String order) {
+    public ResponseEntity<List<MovieDto>> getSearch(@RequestParam(value = "name", required = false) String name,
+                                                    @RequestParam(value = "genre", required = false) Integer id,
+                                                    @RequestParam(value = "order", required = false) String order) {
         Optional<List<MovieDto>> optional = null;
         if (name != null && id == null && order == null) {
             optional = movieService.getByName(name);
