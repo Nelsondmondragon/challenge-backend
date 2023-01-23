@@ -1,6 +1,6 @@
 package com.nedacort.challengespringbackend.domain;
 
-import com.nedacort.challengespringbackend.persistence.enums.UserRole;
+import com.nedacort.challengespringbackend.persistense.enums.UserRole;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

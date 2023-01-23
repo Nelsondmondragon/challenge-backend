@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class PersonageMovieDto {
 
-    private PersonageDto personageDto;
+    private CharacterDto characterDto;
     private MovieDto movieDto;
 
 }
