@@ -1,24 +1,22 @@
 package com.nedacort.challengespringbackend.domain.service;
 
 
-//@AllArgsConstructor
-//@NoArgsConstructor
-//@Service
-public class PersonageService {
-//
-//    @Autowired
-//    private PersonageDtoRepository personageDtoRepository;
-//
-//    @Autowired
-//    private PersonageDtoLimitedRepository personageDtoLimitedRepository;
-//
-//    @Autowired
-//    private PersonageMovieDtoRepository personageMovieDtoRepository;
-//
-//
-//    public Optional<List<PersonageMovieDto>> getAllPersonagesAndMovies() {
-//        return personageMovieDtoRepository.findAllPersonagesAndMovies();
-//    }
+import com.nedacort.challengespringbackend.domain.CharacterDto;
+import com.nedacort.challengespringbackend.persistense.repository.CharacterRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class CharacterService {
+
+    @Autowired
+    private CharacterRepository characterRepository;
+
+    public List<CharacterDto> getAll() {
+        return characterRepository.getAll();
+    }
 //
 //    public List<PersonageDtoLimited> getAllNameAndImage() {
 //        return personageDtoLimitedRepository.getAllLimited();
@@ -40,7 +38,7 @@ public class PersonageService {
 //    public Optional<List<PersonageMovieDto>> findAllByIdMovie(Integer id) {
 //        return personageMovieDtoRepository.findAllByIdMovie(id);
 //    }
-//
+
 //    public PersonageDto save(PersonageDto personageDto) {
 //        return personageDtoRepository.save(personageDto);
 //    }
