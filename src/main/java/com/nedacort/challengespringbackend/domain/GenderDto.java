@@ -9,8 +9,8 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class GenusDto {
+public class GenderDto {
 
     private String name;
-    private byte[] image;
+    private String image;
 }

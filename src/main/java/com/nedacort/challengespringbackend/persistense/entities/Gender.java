@@ -13,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "gender")
+@Table(name = "genders")
 public class Gender {
 
     @Id
@@ -25,7 +25,7 @@ public class Gender {
 
     private String image;
 
-    @OneToMany(mappedBy = "id_gender", cascade = {CascadeType.ALL})
+    @OneToMany(mappedBy = "gender", cascade = {CascadeType.ALL})
     private List<Movie> movies;
 
 }

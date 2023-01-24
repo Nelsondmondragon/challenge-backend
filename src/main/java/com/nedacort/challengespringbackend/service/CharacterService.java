@@ -1,7 +1,8 @@
-package com.nedacort.challengespringbackend.domain.service;
+package com.nedacort.challengespringbackend.service;
 
 
 import com.nedacort.challengespringbackend.domain.CharacterDto;
+import com.nedacort.challengespringbackend.domain.CharacterListDto;
 import com.nedacort.challengespringbackend.persistense.repository.CharacterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,7 +15,7 @@ public class CharacterService {
     @Autowired
     private CharacterRepository characterRepository;
 
-    public List<CharacterDto> getAll() {
+    public List<CharacterListDto> getAll() {
         return characterRepository.getAll();
     }
 //

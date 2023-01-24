@@ -1,7 +1,44 @@
 package com.nedacort.challengespringbackend.persistense.repository;
 
-//@Repository
-public class MovieRepository {}
+import com.nedacort.challengespringbackend.domain.MovieDto;
+import com.nedacort.challengespringbackend.persistense.mapper.MovieMapper;
+import com.nedacort.challengespringbackend.persistense.repositoryjpa.MovieJpaRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+import java.util.Optional;
+
+@Repository
+public class MovieRepositoryImp implements MovieRepository {
+
+
+    @Autowired
+    private MovieMapper movieMapper;
+
+    @Autowired
+    private MovieJpaRepository movieJpaRepository;
+
+    @Override
+    public List<MovieDto> getAll() {
+        return movieMapper.toMovieDtos(movieJpaRepository.findAll());
+    }
+
+    @Override
+    public Optional<MovieDto> getById(Integer id) {
+        return Optional.empty();
+    }
+
+    @Override
+    public MovieDto save(MovieDto movieDto) {
+        return null;
+    }
+
+    @Override
+    public void delete(Integer id) {
+
+    }
+}
 // implements MovieDtoLimitedRepository, MovieDtoRepository, MoviePersonageDtoRepository {
 //
 //    @Autowired

@@ -1,6 +1,7 @@
 package com.nedacort.challengespringbackend.persistense.mapper;
 
 import com.nedacort.challengespringbackend.domain.CharacterDto;
+import com.nedacort.challengespringbackend.persistense.entities.Character;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 

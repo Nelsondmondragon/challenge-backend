@@ -18,5 +18,5 @@ public class MovieDtoDetail {
     private String tittle;
     private LocalDateTime creationDate;
     private QualificationDto qualificationDto;
-    private GenusDto genusDto;
+    private GenderDto genderDto;
 }

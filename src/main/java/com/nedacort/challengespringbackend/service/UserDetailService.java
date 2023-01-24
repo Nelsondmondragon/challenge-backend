@@ -1,4 +1,4 @@
-package com.nedacort.challengespringbackend.domain.service;
+package com.nedacort.challengespringbackend.service;
 
 
 //@Service

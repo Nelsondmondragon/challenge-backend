@@ -5,7 +5,7 @@ import com.nedacort.challengespringbackend.domain.MovieDto;
 import java.util.List;
 import java.util.Optional;
 
-public interface MovieDtoRepository {
+public interface MovieRepository {
 
     List<MovieDto> getAll();
 

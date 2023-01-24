@@ -10,10 +10,10 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class MovieDto {
-    private Integer id;
-    private byte[] image;
-    private String tittle;
-    private LocalDateTime creationDate;
-    private Integer idQualification;
-    private Integer idGenus;
+    private Integer idMovie;
+    private String image;
+    private String title;
+    private LocalDateTime createDate;
+    private Integer qualification;
+//    private Integer idGenus;
 }

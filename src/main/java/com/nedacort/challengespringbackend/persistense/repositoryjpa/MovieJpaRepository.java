@@ -1,11 +1,12 @@
 package com.nedacort.challengespringbackend.persistense.repositoryjpa;
 
 import com.nedacort.challengespringbackend.persistense.entities.Movie;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface MovieJpaRepository extends CrudRepository<Movie, Integer> {
+public interface MovieJpaRepository extends JpaRepository<Movie, Integer> {
 
 //
 //    @Query(value = "select peliculas.id,peliculas.imagen, peliculas.titulo, peliculas.fecha_creacion,\n" +

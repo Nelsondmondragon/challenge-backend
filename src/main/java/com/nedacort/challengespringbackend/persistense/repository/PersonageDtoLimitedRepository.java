@@ -1,9 +1,7 @@
 package com.nedacort.challengespringbackend.persistense.repository;
 
-import com.nedacort.challengespringbackend.domain.PersonageDtoLimited;
-
 import java.util.List;
 
 public interface PersonageDtoLimitedRepository {
-    List<PersonageDtoLimited> getAllLimited();
+//    List<PersonageDtoLimited> getAllLimited();
 }

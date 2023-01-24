@@ -1,22 +1,29 @@
 package com.nedacort.challengespringbackend.web.controller;
 
+import com.nedacort.challengespringbackend.domain.CharacterListDto;
+import com.nedacort.challengespringbackend.service.CharacterService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/characters")
-public class PersonageController {
-//
-//
-//    @Autowired
-//    private PersonageService personageService;
-//
-//
-//    @GetMapping("/all")
+public class CharacterControllerRest {
+
+
+    @Autowired
+    private CharacterService characterService;
+
+
+    @GetMapping()
 //    @ApiOperation(value = "Listado de personajes mostrando su imagen y nombre")
 //    @ApiResponse(code = 200, message = "OK")
-//    private ResponseEntity<List<PersonageDtoLimited>> getAll() {
-//        return new ResponseEntity<>(personageService.getAllNameAndImage(), HttpStatus.OK);
-//    }
+    private ResponseEntity<List<CharacterListDto>> getAll() {
+        return new ResponseEntity<>(characterService.getAll(), HttpStatus.OK);
+    }
 //
 //    @GetMapping
 //    @ApiOperation(value = "Busqueda de personajes por nombre, y filtrar por edad y" +

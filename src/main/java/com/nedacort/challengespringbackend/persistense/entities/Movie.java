@@ -12,7 +12,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "movie")
+@Table(name = "movies")
 public class Movie {
 
     @Id
@@ -24,12 +24,10 @@ public class Movie {
 
     private String title;
 
-    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "create_date")
     private LocalDateTime createDate;
 
-    @Column(name = "id_qualification")
-    private Integer idQualification;
+    private Integer qualification;
 
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -38,7 +36,7 @@ public class Movie {
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
     @JoinTable(
-            name = "character_movie",
+            name = "characters_movies",
             joinColumns = @JoinColumn(name = "id_character", nullable = false),
             inverseJoinColumns = @JoinColumn(name = "id_movie", nullable = false)
     )
