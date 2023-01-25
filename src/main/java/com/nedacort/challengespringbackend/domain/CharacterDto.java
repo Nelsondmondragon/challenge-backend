@@ -1,16 +1,14 @@
 package com.nedacort.challengespringbackend.domain;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.Objects;
 
-@Data
+@Getter
+@Setter
 public class CharacterDto {
-    private Long id;
+    private Long idCharacter;
     private String name;
     private String image;
     private Integer age;

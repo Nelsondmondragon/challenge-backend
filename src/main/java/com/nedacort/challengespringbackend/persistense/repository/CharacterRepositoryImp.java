@@ -1,5 +1,6 @@
 package com.nedacort.challengespringbackend.persistense.repository;
 
+import com.nedacort.challengespringbackend.domain.CharacterDetailsDto;
 import com.nedacort.challengespringbackend.domain.CharacterDto;
 import com.nedacort.challengespringbackend.domain.CharacterListDto;
 import com.nedacort.challengespringbackend.persistense.entities.Character;
@@ -36,8 +37,8 @@ public class CharacterRepositoryImp implements CharacterRepository {
     }
 
     @Override
-    public Optional<CharacterDto> findById(Long id) {
-        return characterJpaRepository.findById(id).map(character -> characterMapper.toCharacterDto(character))
+    public Optional<CharacterDetailsDto> findById(Long id) {
+        return characterJpaRepository.findById(id).map(character -> characterMapper.toCharacterDetailsDto(character))
                 ;
     }
 

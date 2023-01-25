@@ -1,15 +1,6 @@
 package com.nedacort.challengespringbackend.persistence.repository;
 
 
-import com.nedacort.challengespringbackend.persistense.repositoryjpa.PersonajePeliculaCrudRepository;
-import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-
-import java.util.Arrays;
-
-
 //@DataJpaTest
 class CharacterMovieJpaRepositoryTest {
 //

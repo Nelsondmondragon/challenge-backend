@@ -1,16 +1,12 @@
 package com.nedacort.challengespringbackend.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Data
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
+@Getter
+@Setter
 public class GenderDto {
 
+    private Long idGender;
     private String name;
     private String image;
 }

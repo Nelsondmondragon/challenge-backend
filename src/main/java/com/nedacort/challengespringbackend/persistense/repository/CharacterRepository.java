@@ -1,5 +1,6 @@
 package com.nedacort.challengespringbackend.persistense.repository;
 
+import com.nedacort.challengespringbackend.domain.CharacterDetailsDto;
 import com.nedacort.challengespringbackend.domain.CharacterDto;
 import com.nedacort.challengespringbackend.domain.CharacterListDto;
 
@@ -15,7 +16,7 @@ public interface CharacterRepository {
     boolean existsById(Long Id);
 
     //    CharacterDto find
-    Optional<CharacterDto> findById(Long id);
+    Optional<CharacterDetailsDto> findById(Long id);
 
 
     CharacterDto update(Long id, CharacterDto characterDto);

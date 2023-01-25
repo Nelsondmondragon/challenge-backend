@@ -1,6 +1,7 @@
 package com.nedacort.challengespringbackend.service;
 
 
+import com.nedacort.challengespringbackend.domain.CharacterDetailsDto;
 import com.nedacort.challengespringbackend.domain.CharacterDto;
 import com.nedacort.challengespringbackend.domain.CharacterListDto;
 import com.nedacort.challengespringbackend.persistense.repository.CharacterRepository;
@@ -21,8 +22,8 @@ public class CharacterService {
     }
 
 
-    public CharacterDto findById(Long id) {
-        Optional<CharacterDto> byId = characterRepository.findById(id);
+    public CharacterDetailsDto findById(Long id) {
+        Optional<CharacterDetailsDto> byId = characterRepository.findById(id);
         if (byId.isEmpty()) {
             throw new RuntimeException("Character not exist");
         }

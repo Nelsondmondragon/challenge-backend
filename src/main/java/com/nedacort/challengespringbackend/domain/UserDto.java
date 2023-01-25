@@ -1,15 +1,10 @@
 package com.nedacort.challengespringbackend.domain;
 
 import com.nedacort.challengespringbackend.persistense.enums.UserRole;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Data
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
+@Setter
+@Getter
 public class UserDto {
     private Integer id;
     private String username;

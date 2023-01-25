@@ -1,16 +1,15 @@
 package com.nedacort.challengespringbackend.persistense.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Set;
 
-@Data
-@Builder
-@EqualsAndHashCode
-@AllArgsConstructor
-@NoArgsConstructor
+
+@Getter
+@Setter
 @Entity
 @Table(name = "movies")
 public class Movie {
@@ -40,6 +39,7 @@ public class Movie {
             joinColumns = @JoinColumn(name = "id_character", nullable = false),
             inverseJoinColumns = @JoinColumn(name = "id_movie", nullable = false)
     )
+    @JsonManagedReference
     private Set<Character> characters;
 
 

@@ -16,5 +16,6 @@ public interface GenderMapper {
 
     @InheritInverseConfiguration
     @Mapping(target = "movies", ignore = true)
+//    @Mapping(target = "gender", ignore = true)
     Gender toGender(GenderDto gender);
 }

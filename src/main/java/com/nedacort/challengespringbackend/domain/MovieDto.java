@@ -4,11 +4,8 @@ import lombok.*;
 
 import java.time.LocalDateTime;
 
-@Data
-@Builder
-@EqualsAndHashCode
-@AllArgsConstructor
-@NoArgsConstructor
+@Getter
+@Setter
 public class MovieDto {
     private Long idMovie;
     private String image;

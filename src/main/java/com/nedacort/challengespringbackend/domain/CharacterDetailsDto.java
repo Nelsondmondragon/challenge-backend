@@ -1,14 +1,19 @@
 package com.nedacort.challengespringbackend.domain;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+import java.util.Set;
+
+@Getter
+@Setter
 public class CharacterDetailsDto {
-    private Long id;
+    private Long idCharacter;
     private String name;
     private String image;
     private Integer age;
     private String history;
     private Integer peso;
-//    private
+    private Set<MovieDto> movies;
 }

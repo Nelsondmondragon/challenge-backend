@@ -1,5 +1,6 @@
 package com.nedacort.challengespringbackend.web.controller;
 
+import com.nedacort.challengespringbackend.domain.CharacterDetailsDto;
 import com.nedacort.challengespringbackend.domain.CharacterDto;
 import com.nedacort.challengespringbackend.domain.CharacterListDto;
 import com.nedacort.challengespringbackend.service.CharacterService;
@@ -28,7 +29,7 @@ public class CharacterControllerRest {
 
 
     @GetMapping("/{id}")
-    private ResponseEntity<CharacterDto> findById(@PathVariable Long id) {
+    private ResponseEntity<CharacterDetailsDto> findById(@PathVariable Long id) {
         return new ResponseEntity<>(characterService.findById(id), HttpStatus.OK);
     }
 

@@ -1,28 +1,29 @@
 package com.nedacort.challengespringbackend.persistense.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Objects;
 import java.util.Set;
 
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "characters")
 public class Character {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_name")
-    private Long id;
+    @Column(name = "id_character")
+    private Long idCharacter;
     private String image;
     private String name;
     private Integer age;
     private String history;
     private Integer peso;
     @ManyToMany(mappedBy = "characters", cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
+    @JsonBackReference
     private Set<Movie> movies;
 
 

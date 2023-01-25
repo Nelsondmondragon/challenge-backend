@@ -1,6 +1,6 @@
 #FileLock
-#Tue Jan 24 19:41:41 COT 2023
-server=192.168.1.9\:65015
+#Tue Jan 24 21:20:49 COT 2023
+server=192.168.1.9\:50704
 hostName=nedacort
 method=file
-id=185e65f8cfae29cabb6c06416f35abee88643efcc73
+id=185e6ba4e47519edcc992b92a5a9cf3fe8acd0f5083
