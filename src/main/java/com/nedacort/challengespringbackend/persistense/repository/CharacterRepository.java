@@ -10,9 +10,17 @@ public interface CharacterRepository {
 
     List<CharacterListDto> getAll();
 
-    Optional<CharacterDto> getById(Integer id);
+    CharacterDto findByName(String name);
+
+    boolean existsById(Long Id);
+
+    //    CharacterDto find
+    Optional<CharacterDto> findById(Long id);
+
+
+    CharacterDto update(Long id, CharacterDto characterDto);
 
     CharacterDto save(CharacterDto characterDto);
 
-    void delete(Integer id);
+    void delete(Long id);
 }

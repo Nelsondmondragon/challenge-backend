@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class MovieDto {
-    private Integer idMovie;
+    private Long idMovie;
     private String image;
     private String title;
     private LocalDateTime createDate;

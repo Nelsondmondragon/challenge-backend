@@ -2,7 +2,7 @@ package com.nedacort.challengespringbackend.persistense.repository;
 
 import com.nedacort.challengespringbackend.domain.CharacterDto;
 import com.nedacort.challengespringbackend.domain.CharacterListDto;
-import com.nedacort.challengespringbackend.persistense.mapper.CharacterListMapper;
+import com.nedacort.challengespringbackend.persistense.entities.Character;
 import com.nedacort.challengespringbackend.persistense.mapper.CharacterMapper;
 import com.nedacort.challengespringbackend.persistense.repositoryjpa.CharacterJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,19 +20,36 @@ public class CharacterRepositoryImp implements CharacterRepository {
     @Autowired
     private CharacterMapper characterMapper;
 
-
-    @Autowired
-    private CharacterListMapper characterListMapper;
-
-
     @Override
     public List<CharacterListDto> getAll() {
-        return characterListMapper.toCharacterDtos(characterJpaRepository.findAll());
+        return characterMapper.toCharacterListDtos(characterJpaRepository.findAll());
     }
 
     @Override
-    public Optional<CharacterDto> getById(Integer id) {
-        return characterJpaRepository.findById(id).map(character -> characterMapper.toCharacterDto(character));
+    public CharacterDto findByName(String name) {
+        return characterMapper.toCharacterDto(characterJpaRepository.findByName(name));
+    }
+
+    @Override
+    public boolean existsById(Long id) {
+        return characterJpaRepository.existsById(id);
+    }
+
+    @Override
+    public Optional<CharacterDto> findById(Long id) {
+        return characterJpaRepository.findById(id).map(character -> characterMapper.toCharacterDto(character))
+                ;
+    }
+
+    @Override
+    public CharacterDto update(Long id, CharacterDto characterDto) {
+        Optional<Character> characterOptional = characterJpaRepository.findById(id);
+        if (characterOptional.isEmpty()) {
+            throw new RuntimeException("Not exist character");
+        }
+        characterMapper.toUpdateCharacterDto(characterOptional.get(), characterDto);
+        return characterMapper.toCharacterDto(characterJpaRepository.save(characterOptional.get()));
+
     }
 
     @Override
@@ -43,12 +60,8 @@ public class CharacterRepositoryImp implements CharacterRepository {
     }
 
     @Override
-    public void delete(Integer id) {
-        if (characterJpaRepository.existsById(id)) {
-            characterJpaRepository.deleteById(id);
-        } else {
-            System.out.println("Exception");
-        }
+    public void delete(Long id) {
+        characterJpaRepository.deleteById(id);
     }
 
 }

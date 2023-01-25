@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CharacterService {
@@ -18,6 +19,37 @@ public class CharacterService {
     public List<CharacterListDto> getAll() {
         return characterRepository.getAll();
     }
+
+
+    public CharacterDto findById(Long id) {
+        Optional<CharacterDto> byId = characterRepository.findById(id);
+        if (byId.isEmpty()) {
+            throw new RuntimeException("Character not exist");
+        }
+
+        return byId.get();
+    }
+
+    public CharacterDto update(Long id, CharacterDto characterDto) {
+        return characterRepository.update(id, characterDto);
+    }
+
+    public CharacterDto save(CharacterDto characterDto) {
+        CharacterDto characterRepo = characterRepository.findByName(characterDto.getName());
+        if (characterRepo != null && characterRepo.equals(characterDto)) {
+            throw new RuntimeException("Character exist");
+        }
+        return characterRepository.save(characterDto);
+    }
+
+    public void delete(Long id) {
+        if (!characterRepository.existsById(id)) {
+            throw new RuntimeException("Character id not exist");
+        }
+        characterRepository.delete(id);
+    }
+
+
 //
 //    public List<PersonageDtoLimited> getAllNameAndImage() {
 //        return personageDtoLimitedRepository.getAllLimited();
@@ -38,17 +70,6 @@ public class CharacterService {
 //
 //    public Optional<List<PersonageMovieDto>> findAllByIdMovie(Integer id) {
 //        return personageMovieDtoRepository.findAllByIdMovie(id);
-//    }
-
-//    public PersonageDto save(PersonageDto personageDto) {
-//        return personageDtoRepository.save(personageDto);
-//    }
-//
-//    public boolean delete(Integer id) {
-//        return getPersonageById(id).map(personageDto -> {
-//            personageDtoRepository.delete(id);
-//            return true;
-//        }).orElse(false);
 //    }
 
 

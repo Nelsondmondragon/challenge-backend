@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Objects;
 import java.util.Set;
 
 @Data
@@ -15,7 +16,7 @@ public class Character {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_name")
-    private Integer id;
+    private Long id;
     private String image;
     private String name;
     private Integer age;
@@ -23,5 +24,6 @@ public class Character {
     private Integer peso;
     @ManyToMany(mappedBy = "characters", cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
     private Set<Movie> movies;
+
 
 }

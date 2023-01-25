@@ -1,5 +1,6 @@
 package com.nedacort.challengespringbackend.web.controller;
 
+import com.nedacort.challengespringbackend.domain.CharacterDto;
 import com.nedacort.challengespringbackend.domain.CharacterListDto;
 import com.nedacort.challengespringbackend.service.CharacterService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +22,35 @@ public class CharacterControllerRest {
     @GetMapping()
 //    @ApiOperation(value = "Listado de personajes mostrando su imagen y nombre")
 //    @ApiResponse(code = 200, message = "OK")
-    private ResponseEntity<List<CharacterListDto>> getAll() {
+    private ResponseEntity<List<CharacterListDto>> findAll() {
         return new ResponseEntity<>(characterService.getAll(), HttpStatus.OK);
     }
+
+
+    @GetMapping("/{id}")
+    private ResponseEntity<CharacterDto> findById(@PathVariable Long id) {
+        return new ResponseEntity<>(characterService.findById(id), HttpStatus.OK);
+    }
+
+
+    @PostMapping()
+    private ResponseEntity<CharacterDto> save(@RequestBody CharacterDto characterDto) {
+        return new ResponseEntity<>(characterService.save(characterDto), HttpStatus.CREATED);
+    }
+
+    @PutMapping("/{id}")
+    private ResponseEntity<CharacterDto> update(@PathVariable Long id, @RequestBody CharacterDto characterDto) {
+        return new ResponseEntity<>(characterService.update(id, characterDto), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    private ResponseEntity<CharacterDto> delete(@PathVariable Long id) {
+        characterService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
+
+
+//
 //
 //    @GetMapping
 //    @ApiOperation(value = "Busqueda de personajes por nombre, y filtrar por edad y" +
