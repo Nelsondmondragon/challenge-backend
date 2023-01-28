@@ -81,7 +81,6 @@ public class CharacterRepositoryImpl implements CharacterRepository {
 
     @Override
     public CharacterDetailsDto save(CharacterIdMovieDto characterIdMovieDto) {
-
         List<MovieDto> movieDtos = new ArrayList<>();
         for (long id : characterIdMovieDto.getIdMovies()) {
             if (!movieRepository.existsById(id)) {
@@ -95,14 +94,20 @@ public class CharacterRepositoryImpl implements CharacterRepository {
         characterIdMovieDto.getIdMovies().forEach(id -> {
             characterMovieRepository.save(characterDetailsDto.getIdCharacter(), id);
         });
-
         characterDetailsDto.setMovies(movieDtos);
         return characterDetailsDto;
     }
 
     @Override
-    public void delete(Long id) {
+    public void deleteById(Long id) {
+        characterJpaRepository.findById(id).ifPresent(character -> {
+                    characterMovieRepository.findAllByIdCharacter(character.getIdCharacter()).forEach(characterMovie -> {
+                        characterMovieRepository.deleteById(characterMovie.getId());
+                    });
+                }
+        );
         characterJpaRepository.deleteById(id);
+
     }
 
 }

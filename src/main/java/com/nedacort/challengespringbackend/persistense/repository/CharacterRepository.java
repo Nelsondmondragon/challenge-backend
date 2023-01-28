@@ -28,5 +28,5 @@ public interface CharacterRepository {
 
     CharacterDetailsDto save(CharacterIdMovieDto characterDto);
 
-    void delete(Long id);
+    void deleteById(Long id);
 }

@@ -26,9 +26,9 @@ public class Character {
     private Integer age;
     private String history;
     private Integer peso;
-    @ManyToMany(mappedBy = "characters", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "characters", fetch = FetchType.LAZY)
     @JsonBackReference
-    private List<Movie> movies = new ArrayList<>();
+    private List<Movie> movies;
 
 
 }

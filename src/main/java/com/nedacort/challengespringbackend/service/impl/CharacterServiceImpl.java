@@ -73,7 +73,7 @@ public class CharacterServiceImpl implements CharacterService {
         if (!characterRepository.existsById(id)) {
             throw new RuntimeException("Character id not exist");
         }
-        characterRepository.delete(id);
+        characterRepository.deleteById(id);
     }
 
 
