@@ -1,77 +1,31 @@
 package com.nedacort.challengespringbackend.service;
 
-
 import com.nedacort.challengespringbackend.domain.CharacterDetailsDto;
 import com.nedacort.challengespringbackend.domain.CharacterDto;
+import com.nedacort.challengespringbackend.domain.CharacterIdMovieDto;
 import com.nedacort.challengespringbackend.domain.CharacterListDto;
-import com.nedacort.challengespringbackend.persistense.repository.CharacterRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
-@Service
-public class CharacterService {
 
-    @Autowired
-    private CharacterRepository characterRepository;
+public interface CharacterService {
 
-    public List<CharacterListDto> getAll() {
-        return characterRepository.getAll();
-    }
+    List<CharacterListDto> getAll();
 
+    CharacterDetailsDto findById(Long id);
 
-    public CharacterDetailsDto findById(Long id) {
-        Optional<CharacterDetailsDto> byId = characterRepository.findById(id);
-        if (byId.isEmpty()) {
-            throw new RuntimeException("Character not exist");
-        }
+    List<CharacterDto> findByName(String name);
 
-        return byId.get();
-    }
+    List<CharacterDto> findByAge(Integer age);
 
-    public CharacterDto update(Long id, CharacterDto characterDto) {
-        return characterRepository.update(id, characterDto);
-    }
+    List<CharacterDetailsDto> findByIdMovie(Long idMovie);
 
-    public CharacterDto save(CharacterDto characterDto) {
-        CharacterDto characterRepo = characterRepository.findByName(characterDto.getName());
-        if (characterRepo != null && characterRepo.equals(characterDto)) {
-            throw new RuntimeException("Character exist");
-        }
-        return characterRepository.save(characterDto);
-    }
+    CharacterDto update(Long id, CharacterDto characterDto);
 
-    public void delete(Long id) {
-        if (!characterRepository.existsById(id)) {
-            throw new RuntimeException("Character id not exist");
-        }
-        characterRepository.delete(id);
-    }
+    CharacterDetailsDto save(CharacterIdMovieDto characterDto);
 
-
-//
-//    public List<PersonageDtoLimited> getAllNameAndImage() {
-//        return personageDtoLimitedRepository.getAllLimited();
-//    }
-//
-//    public Optional<PersonageDto> getPersonageById(Integer id) {
-//        return personageDtoRepository.getPersonageById(id);
-//    }
-//
-//
-//    public Optional<List<PersonageMovieDto>> findAllByName(String name) {
-//        return personageMovieDtoRepository.findAllByName(name);
-//    }
-//
-//    public Optional<List<PersonageMovieDto>> findAllByAge(Integer age) {
-//        return personageMovieDtoRepository.findAllByAge(age);
-//    }
-//
-//    public Optional<List<PersonageMovieDto>> findAllByIdMovie(Integer id) {
-//        return personageMovieDtoRepository.findAllByIdMovie(id);
-//    }
+    void delete(Long id);
 
 
 }

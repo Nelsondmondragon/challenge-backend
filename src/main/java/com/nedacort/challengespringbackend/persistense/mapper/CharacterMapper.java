@@ -2,13 +2,14 @@ package com.nedacort.challengespringbackend.persistense.mapper;
 
 import com.nedacort.challengespringbackend.domain.CharacterDetailsDto;
 import com.nedacort.challengespringbackend.domain.CharacterDto;
+import com.nedacort.challengespringbackend.domain.CharacterIdMovieDto;
 import com.nedacort.challengespringbackend.domain.CharacterListDto;
 import com.nedacort.challengespringbackend.persistense.entities.Character;
 import org.mapstruct.*;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+@Mapper(uses = {MovieMapper.class}, componentModel = "spring", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 public interface CharacterMapper {
 
 
@@ -27,6 +28,8 @@ public interface CharacterMapper {
 
     CharacterDetailsDto toCharacterDetailsDto(Character character);
 
+    List<CharacterDetailsDto> toCharacterDetailsDtos(List<Character> character);
+
 
     @Mapping(target = "idCharacter", ignore = true)
     @Mapping(target = "movies", ignore = true)
@@ -35,4 +38,8 @@ public interface CharacterMapper {
     @InheritInverseConfiguration
     @Mapping(target = "movies", ignore = true)
     Character toCharacter(CharacterDto characterDto);
+
+    @InheritInverseConfiguration
+    @Mapping(target = "movies", ignore = true)
+    Character toCharacter(CharacterIdMovieDto characterIdMovieDto);
 }

@@ -1,28 +1,27 @@
 package com.nedacort.challengespringbackend.web.controller;
 
+import com.nedacort.challengespringbackend.domain.MovieListDto;
+import com.nedacort.challengespringbackend.service.MovieService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/movies")
 public class MovieController {
 
 
-//    @Autowired
-//    private MovieService movieService;
+    @Autowired
+    private MovieService movieService;
 
 
-    @GetMapping("/hello")
-    public String hello(){
-        return "Hello";
+    @GetMapping()
+    public ResponseEntity<List<MovieListDto>> getAll() {
+        return new ResponseEntity<>(movieService.findAll(), HttpStatus.OK);
     }
-//
-//    @GetMapping("/all")
-//    @ApiOperation(value = "Listado de peliculas con los campos imagen, titulo" +
-//            "y fecha de creacion")
-//    @ApiResponse(code = 201, message = "OK")
-//    public ResponseEntity<List<MovieDtoLimited>> getAll() {
-//        return new ResponseEntity<>(movieService.getAllLimited(), HttpStatus.OK);
-//    }
 //
 //    @GetMapping("/detail")
 //    @ApiOperation(value = "Listado de Peliculas junto a sus personajes asociados")

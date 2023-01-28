@@ -1,15 +1,19 @@
 package com.nedacort.challengespringbackend.persistense.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 @Getter
 @Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+//@ToString
 @Entity
 @Table(name = "characters")
 public class Character {
@@ -22,9 +26,9 @@ public class Character {
     private Integer age;
     private String history;
     private Integer peso;
-    @ManyToMany(mappedBy = "characters", cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "characters", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonBackReference
-    private Set<Movie> movies;
+    private List<Movie> movies = new ArrayList<>();
 
 
 }

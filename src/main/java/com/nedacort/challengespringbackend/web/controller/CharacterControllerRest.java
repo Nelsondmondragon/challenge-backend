@@ -2,6 +2,7 @@ package com.nedacort.challengespringbackend.web.controller;
 
 import com.nedacort.challengespringbackend.domain.CharacterDetailsDto;
 import com.nedacort.challengespringbackend.domain.CharacterDto;
+import com.nedacort.challengespringbackend.domain.CharacterIdMovieDto;
 import com.nedacort.challengespringbackend.domain.CharacterListDto;
 import com.nedacort.challengespringbackend.service.CharacterService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,20 @@ public class CharacterControllerRest {
     @GetMapping()
 //    @ApiOperation(value = "Listado de personajes mostrando su imagen y nombre")
 //    @ApiResponse(code = 200, message = "OK")
-    private ResponseEntity<List<CharacterListDto>> findAll() {
+    private ResponseEntity<List<?>> findAll(@RequestParam(required = false) String name,
+                                            @RequestParam(required = false) Integer age,
+                                            @RequestParam(required = false) Long idmovie) {
+
+        if (name != null && age == null && idmovie == null) {
+            return new ResponseEntity<>(characterService.findByName(name), HttpStatus.OK);
+        }
+        if (name == null && age != null && idmovie == null) {
+            return new ResponseEntity<>(characterService.findByAge(age), HttpStatus.OK);
+        }
+        if (name == null && age == null && idmovie != null) {
+            return new ResponseEntity<>(characterService.findByIdMovie(idmovie), HttpStatus.OK);
+        }
+
         return new ResponseEntity<>(characterService.getAll(), HttpStatus.OK);
     }
 
@@ -35,7 +49,7 @@ public class CharacterControllerRest {
 
 
     @PostMapping()
-    private ResponseEntity<CharacterDto> save(@RequestBody CharacterDto characterDto) {
+    private ResponseEntity<CharacterDetailsDto> save(@RequestBody CharacterIdMovieDto characterDto) {
         return new ResponseEntity<>(characterService.save(characterDto), HttpStatus.CREATED);
     }
 

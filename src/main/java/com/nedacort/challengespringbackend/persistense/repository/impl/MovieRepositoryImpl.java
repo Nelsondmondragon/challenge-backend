@@ -1,7 +1,9 @@
-package com.nedacort.challengespringbackend.persistense.repository;
+package com.nedacort.challengespringbackend.persistense.repository.impl;
 
 import com.nedacort.challengespringbackend.domain.MovieDto;
+import com.nedacort.challengespringbackend.domain.MovieListDto;
 import com.nedacort.challengespringbackend.persistense.mapper.MovieMapper;
+import com.nedacort.challengespringbackend.persistense.repository.MovieRepository;
 import com.nedacort.challengespringbackend.persistense.repositoryjpa.MovieJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -10,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public class MovieRepositoryImp implements MovieRepository {
+public class MovieRepositoryImpl implements MovieRepository {
 
 
     @Autowired
@@ -20,13 +22,18 @@ public class MovieRepositoryImp implements MovieRepository {
     private MovieJpaRepository movieJpaRepository;
 
     @Override
-    public List<MovieDto> getAll() {
-        return movieMapper.toMovieDtos(movieJpaRepository.findAll());
+    public List<MovieListDto> getAll() {
+        return movieMapper.toMovieListDtos(movieJpaRepository.findAll());
     }
 
     @Override
-    public Optional<MovieDto> getById(Integer id) {
-        return Optional.empty();
+    public boolean existsById(Long id) {
+        return movieJpaRepository.existsById(id);
+    }
+
+    @Override
+    public Optional<MovieDto> findById(Long id) {
+        return movieJpaRepository.findById(id).map(movie -> movieMapper.toMovieDto(movie));
     }
 
     @Override

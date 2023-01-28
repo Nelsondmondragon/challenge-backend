@@ -2,6 +2,7 @@ package com.nedacort.challengespringbackend.persistense.repository;
 
 import com.nedacort.challengespringbackend.domain.CharacterDetailsDto;
 import com.nedacort.challengespringbackend.domain.CharacterDto;
+import com.nedacort.challengespringbackend.domain.CharacterIdMovieDto;
 import com.nedacort.challengespringbackend.domain.CharacterListDto;
 
 import java.util.List;
@@ -11,7 +12,11 @@ public interface CharacterRepository {
 
     List<CharacterListDto> getAll();
 
-    CharacterDto findByName(String name);
+    List<CharacterDto> findByName(String name);
+
+    List<CharacterDto> findByAge(Integer age);
+
+    List<CharacterDetailsDto> findByIdMovie(Long idMovie);
 
     boolean existsById(Long Id);
 
@@ -21,7 +26,7 @@ public interface CharacterRepository {
 
     CharacterDto update(Long id, CharacterDto characterDto);
 
-    CharacterDto save(CharacterDto characterDto);
+    CharacterDetailsDto save(CharacterIdMovieDto characterDto);
 
     void delete(Long id);
 }

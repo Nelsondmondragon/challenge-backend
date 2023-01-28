@@ -7,7 +7,7 @@ import static org.mockito.Mockito.verify;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(MockitoExtension.class)
-class CharacterServiceTest {
+class CharacterServiceImplTest {
 //
 //    @Mock
 //    private PersonageDtoLimitedRepository personageDtoLimitedRepository;

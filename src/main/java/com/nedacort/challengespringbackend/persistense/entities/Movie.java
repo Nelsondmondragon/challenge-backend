@@ -5,11 +5,18 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 
 @Getter
 @Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@NamedEntityGraph(name = "characters.detail", attributeNodes = @NamedAttributeNode("characters"))
+//@ToString
 @Entity
 @Table(name = "movies")
 public class Movie {
@@ -33,14 +40,15 @@ public class Movie {
     @JoinColumn(name = "id_gender", insertable = false, updatable = false)
     private Gender gender;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
+    @ManyToMany()
     @JoinTable(
             name = "characters_movies",
-            joinColumns = @JoinColumn(name = "id_character", nullable = false),
-            inverseJoinColumns = @JoinColumn(name = "id_movie", nullable = false)
+            joinColumns = @JoinColumn(name = "id_movie", nullable = false),
+            inverseJoinColumns = @JoinColumn(name = "id_character", nullable = false)
     )
     @JsonManagedReference
-    private Set<Character> characters;
+//    @Column(insertable = false, updatable = false)
+    private List<Character> characters = new ArrayList<>();
 
 
 }

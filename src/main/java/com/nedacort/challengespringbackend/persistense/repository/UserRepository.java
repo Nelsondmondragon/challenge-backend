@@ -1,24 +1,11 @@
 package com.nedacort.challengespringbackend.persistense.repository;
 
-//@Repository
-public class UserRepository {}
+import com.nedacort.challengespringbackend.domain.UserDto;
 
-//implements UserDtoRepository {
-//
-//    @Autowired
-//    private UserCrudRepository userCrudRepository;
-//
-//    @Autowired
-//    private UserDtoMapper userDtoMapper;
-//
-//    @Override
-//    public Optional<UserDto> getByUsername(String username) {
-//        return userCrudRepository.findByUsername(username)
-//                .map(user -> userDtoMapper.toUserDto(user));
-//    }
-//
-//    @Override
-//    public UserDto save(UserDto userDto) {
-//        return userDtoMapper.toUserDto(userCrudRepository.save(userDtoMapper.toUser(userDto)));
-//    }
-//}
+import java.util.Optional;
+
+public interface UserRepository {
+    Optional<UserDto> getByUsername(String username);
+
+    UserDto save(UserDto userDto);
+}
