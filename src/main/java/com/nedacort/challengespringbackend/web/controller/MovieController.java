@@ -1,5 +1,6 @@
 package com.nedacort.challengespringbackend.web.controller;
 
+import com.nedacort.challengespringbackend.domain.MovieDetailsDto;
 import com.nedacort.challengespringbackend.domain.MovieListDto;
 import com.nedacort.challengespringbackend.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +20,13 @@ public class MovieController {
 
 
     @GetMapping()
-    public ResponseEntity<List<MovieListDto>> getAll() {
+    public ResponseEntity<List<MovieListDto>> findAll() {
         return new ResponseEntity<>(movieService.findAll(), HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<MovieDetailsDto> findById(@PathVariable Long id) {
+        return new ResponseEntity<>(movieService.findById(id), HttpStatus.OK);
     }
 //
 //    @GetMapping("/detail")

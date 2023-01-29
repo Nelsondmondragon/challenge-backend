@@ -87,7 +87,8 @@ public class CharacterServiceImpl implements CharacterService {
             if (!movieService.existsById(id)) {
                 throw new RuntimeException("Id movie not exist");
             }
-            movieService.findById(id).ifPresent(movieDtos::add);
+            MovieDetailsDto movieDetailsDto = movieService.findById(id);
+            movieDtos.add(new MovieDto(movieDetailsDto));
         }
         CharacterDto characterDto = characterRepository.save(new CharacterDto(characterIdMovieDto));
         characterIdMovieDto.getIdMovies().forEach(id -> {

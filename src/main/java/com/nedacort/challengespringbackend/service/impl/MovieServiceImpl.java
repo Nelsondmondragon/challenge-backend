@@ -1,9 +1,9 @@
 package com.nedacort.challengespringbackend.service.impl;
 
+import com.nedacort.challengespringbackend.domain.MovieDetailsDto;
 import com.nedacort.challengespringbackend.domain.MovieDto;
 import com.nedacort.challengespringbackend.domain.MovieListDto;
 import com.nedacort.challengespringbackend.persistense.repository.MovieRepository;
-import com.nedacort.challengespringbackend.service.CharacterService;
 import com.nedacort.challengespringbackend.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,12 +20,12 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public List<MovieListDto> findAll() {
-        return movieRepository.getAll();
+        return movieRepository.findAll();
     }
 
     @Override
-    public Optional<MovieDto> findById(Long id) {
-        return movieRepository.findById(id);
+    public MovieDetailsDto findById(Long id) {
+        return movieRepository.findById(id).orElseThrow(() -> new RuntimeException("Id movie not exists"));
     }
 
     @Override

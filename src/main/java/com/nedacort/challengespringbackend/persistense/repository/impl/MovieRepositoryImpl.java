@@ -1,5 +1,6 @@
 package com.nedacort.challengespringbackend.persistense.repository.impl;
 
+import com.nedacort.challengespringbackend.domain.MovieDetailsDto;
 import com.nedacort.challengespringbackend.domain.MovieDto;
 import com.nedacort.challengespringbackend.domain.MovieListDto;
 import com.nedacort.challengespringbackend.persistense.mapper.MovieMapper;
@@ -22,7 +23,7 @@ public class MovieRepositoryImpl implements MovieRepository {
     private MovieJpaRepository movieJpaRepository;
 
     @Override
-    public List<MovieListDto> getAll() {
+    public List<MovieListDto> findAll() {
         return movieMapper.toMovieListDtos(movieJpaRepository.findAll());
     }
 
@@ -32,8 +33,8 @@ public class MovieRepositoryImpl implements MovieRepository {
     }
 
     @Override
-    public Optional<MovieDto> findById(Long id) {
-        return movieJpaRepository.findById(id).map(movie -> movieMapper.toMovieDto(movie));
+    public Optional<MovieDetailsDto> findById(Long id) {
+        return movieJpaRepository.findById(id).map(movie -> movieMapper.toMovieDetailsDto(movie));
     }
 
     @Override

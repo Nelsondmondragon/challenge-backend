@@ -34,7 +34,7 @@ public interface CharacterJpaRepository extends JpaRepository<Character, Long> {
             "FROM characters INNER JOIN characters_movies ON " +
             "characters_movies.id_character=characters.id_character " +
             "INNER JOIN movies ON movies.id_movie=characters_movies.id_movie " +
-            "WHERE characters.id_character =22 ORDER BY characters.ID_CHARACTER asc", nativeQuery = true)
+            "WHERE movies.id_movie =?1 ORDER BY characters.ID_CHARACTER asc", nativeQuery = true)
     List<Character> findByIdMovie(Long idMovie);
 
 
