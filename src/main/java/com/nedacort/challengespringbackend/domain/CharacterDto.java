@@ -7,6 +7,8 @@ import java.util.Objects;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class CharacterDto {
     private Long idCharacter;
     private String name;
@@ -16,16 +18,15 @@ public class CharacterDto {
     private Integer peso;
 
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        CharacterDto that = (CharacterDto) o;
-        return name.equals(that.name) && age.equals(that.age) && history.equals(that.history) && peso.equals(that.peso);
+    public CharacterDto(Object object) {
+        if (object instanceof CharacterIdMovieDto) {
+            CharacterIdMovieDto characterIdMovieDto = (CharacterIdMovieDto) object;
+            this.setName(characterIdMovieDto.getName());
+            this.setImage(characterIdMovieDto.getImage());
+            this.setAge(characterIdMovieDto.getAge());
+            this.setHistory(characterIdMovieDto.getHistory());
+            this.setPeso(characterIdMovieDto.getPeso());
+        }
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(name, age, history, peso);
-    }
 }

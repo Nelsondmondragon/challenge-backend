@@ -1,15 +1,15 @@
 package com.nedacort.challengespringbackend.service.impl;
 
 
-import com.nedacort.challengespringbackend.domain.CharacterDetailsDto;
-import com.nedacort.challengespringbackend.domain.CharacterDto;
-import com.nedacort.challengespringbackend.domain.CharacterIdMovieDto;
-import com.nedacort.challengespringbackend.domain.CharacterListDto;
+import com.nedacort.challengespringbackend.domain.*;
 import com.nedacort.challengespringbackend.persistense.repository.CharacterRepository;
+import com.nedacort.challengespringbackend.service.CharacterMovieService;
 import com.nedacort.challengespringbackend.service.CharacterService;
+import com.nedacort.challengespringbackend.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,6 +20,12 @@ public class CharacterServiceImpl implements CharacterService {
     private CharacterRepository characterRepository;
 
 
+    @Autowired
+    private MovieService movieService;
+
+    @Autowired
+    private CharacterMovieService characterMovieService;
+
     @Override
     public List<CharacterListDto> getAll() {
         return characterRepository.getAll();
@@ -27,12 +33,7 @@ public class CharacterServiceImpl implements CharacterService {
 
     @Override
     public CharacterDetailsDto findById(Long id) {
-        Optional<CharacterDetailsDto> byId = characterRepository.findById(id);
-        if (byId.isEmpty()) {
-            throw new RuntimeException("Character not exist");
-        }
-
-        return byId.get();
+        return characterRepository.findById(id).orElseThrow(() -> new RuntimeException("Id character not exists"));
     }
 
     @Override
@@ -51,53 +52,63 @@ public class CharacterServiceImpl implements CharacterService {
     }
 
     @Override
+    public CharacterDto update(Long idCharacter, CharacterIdMovieDto characterIdMovieDto) {
+//        System.out.println("ssssssssssssssssss");
+        List<Long> idMovies = characterIdMovieDto.getIdMovies();
+//        System.out.println(idMovies.size() +" size idMovies");
+        List<CharacterMovieDto> allByIdCharacter =
+                characterMovieService.findAllByIdCharacter(idCharacter);
 
-    public CharacterDto update(Long id, CharacterDto characterDto) {
-        return characterRepository.update(id, characterDto);
+//        System.out.println(allByIdCharacter.size() + " size Chara");
+
+        for (CharacterMovieDto characterMovieDto : allByIdCharacter
+        ) {
+            System.out.println(characterMovieDto + " e");
+            if (!idMovies.contains(characterMovieDto.getIdMovie())) {
+                characterMovieService.deleteById(characterMovieDto.getId());
+            }
+        }
+        System.out.println("errro");
+        for (long id : characterIdMovieDto.getIdMovies()) {
+            if (!movieService.existsById(id)) {
+                throw new RuntimeException("Id movie not exist");
+            }
+            if (!characterMovieService.existsByIdCharacterAndIdMovie(idCharacter, id)) {
+                characterMovieService.save(idCharacter, id);
+            }
+        }
+        return characterRepository.update(new CharacterDto(characterIdMovieDto));
     }
 
     @Override
-    public CharacterDetailsDto save(CharacterIdMovieDto characterDto) {
-//        List<CharacterDto> characterRepo = characterRepository.findByName(characterDto.getName());
-//        for (CharacterDto characterDto1 : characterRepo) {
-//            if (characterDto1 != null && characterDto1.equals(characterDto)) {
-//                throw new RuntimeException("Character exist");
-//            }
-//        }
-        return characterRepository.save(characterDto);
+    public CharacterDetailsDto save(CharacterIdMovieDto characterIdMovieDto) {
+        List<MovieDto> movieDtos = new ArrayList<>();
+        for (long id : characterIdMovieDto.getIdMovies()) {
+            if (!movieService.existsById(id)) {
+                throw new RuntimeException("Id movie not exist");
+            }
+            movieService.findById(id).ifPresent(movieDtos::add);
+        }
+        CharacterDto characterDto = characterRepository.save(new CharacterDto(characterIdMovieDto));
+        characterIdMovieDto.getIdMovies().forEach(id -> {
+            characterMovieService.save(characterDto.getIdCharacter(), id);
+        });
+        CharacterDetailsDto characterDetailsDto = new CharacterDetailsDto(characterDto);
+        characterDetailsDto.setMovies(movieDtos);
+        return characterDetailsDto;
     }
 
     @Override
 
     public void delete(Long id) {
-        if (!characterRepository.existsById(id)) {
-            throw new RuntimeException("Character id not exist");
-        }
-        characterRepository.deleteById(id);
+        CharacterDetailsDto characterDetailsDto = findById(id);
+        characterMovieService.findAllByIdCharacter(characterDetailsDto.getIdCharacter()).forEach(characterMovie -> {
+                    characterMovieService.deleteById(characterMovie.getId());
+                    characterRepository.deleteById(id);
+
+                }
+        );
     }
-
-
-//
-//    public List<PersonageDtoLimited> getAllNameAndImage() {
-//        return personageDtoLimitedRepository.getAllLimited();
-//    }
-//
-//    public Optional<PersonageDto> getPersonageById(Integer id) {
-//        return personageDtoRepository.getPersonageById(id);
-//    }
-//
-//
-//    public Optional<List<PersonageMovieDto>> findAllByName(String name) {
-//        return personageMovieDtoRepository.findAllByName(name);
-//    }
-//
-//    public Optional<List<PersonageMovieDto>> findAllByAge(Integer age) {
-//        return personageMovieDtoRepository.findAllByAge(age);
-//    }
-//
-//    public Optional<List<PersonageMovieDto>> findAllByIdMovie(Integer id) {
-//        return personageMovieDtoRepository.findAllByIdMovie(id);
-//    }
 
 
 }

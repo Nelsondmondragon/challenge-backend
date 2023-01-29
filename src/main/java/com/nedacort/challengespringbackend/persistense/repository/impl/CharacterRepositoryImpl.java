@@ -46,13 +46,6 @@ public class CharacterRepositoryImpl implements CharacterRepository {
 
     @Override
     public List<CharacterDetailsDto> findByIdMovie(Long idMovie) {
-
-        for (Character character : characterJpaRepository.findByIdMovie(idMovie)
-        ) {
-            System.out.println("ssss " + character.getMovies().size());
-
-        }
-
         return characterMapper.toCharacterDetailsDtos(characterJpaRepository.findByIdMovie(idMovie));
     }
 
@@ -64,48 +57,27 @@ public class CharacterRepositoryImpl implements CharacterRepository {
 
     @Override
     public Optional<CharacterDetailsDto> findById(Long id) {
-        return characterJpaRepository.findById(id).map(character -> characterMapper.toCharacterDetailsDto(character))
-                ;
+        return characterJpaRepository.findById(id).map(
+                character -> characterMapper.toCharacterDetailsDto(character));
     }
 
     @Override
-    public CharacterDto update(Long id, CharacterDto characterDto) {
-        Optional<Character> characterOptional = characterJpaRepository.findById(id);
-        if (characterOptional.isEmpty()) {
-            throw new RuntimeException("Not exist character");
-        }
-        characterMapper.toUpdateCharacterDto(characterOptional.get(), characterDto);
-        return characterMapper.toCharacterDto(characterJpaRepository.save(characterOptional.get()));
+    public CharacterDto update(CharacterDto characterDto) {
+        return characterMapper.toCharacterDto(characterJpaRepository
+                .save(characterMapper.toCharacter(characterDto)));
 
     }
 
     @Override
-    public CharacterDetailsDto save(CharacterIdMovieDto characterIdMovieDto) {
-        List<MovieDto> movieDtos = new ArrayList<>();
-        for (long id : characterIdMovieDto.getIdMovies()) {
-            if (!movieRepository.existsById(id)) {
-                throw new RuntimeException("Id movie not exist");
-            }
-            movieRepository.findById(id).ifPresent(movieDtos::add);
-        }
-        CharacterDetailsDto characterDetailsDto = characterMapper.toCharacterDetailsDto(
-                characterJpaRepository
-                        .save(characterMapper.toCharacter(characterIdMovieDto)));
-        characterIdMovieDto.getIdMovies().forEach(id -> {
-            characterMovieRepository.save(characterDetailsDto.getIdCharacter(), id);
-        });
-        characterDetailsDto.setMovies(movieDtos);
-        return characterDetailsDto;
+    public CharacterDto save(CharacterDto characterDto) {
+        return characterMapper.toCharacterDto(
+                characterJpaRepository.save(
+                        characterMapper.toCharacter(characterDto)));
     }
 
     @Override
     public void deleteById(Long id) {
-        characterJpaRepository.findById(id).ifPresent(character -> {
-                    characterMovieRepository.findAllByIdCharacter(character.getIdCharacter()).forEach(characterMovie -> {
-                        characterMovieRepository.deleteById(characterMovie.getId());
-                    });
-                }
-        );
+
         characterJpaRepository.deleteById(id);
 
     }

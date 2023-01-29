@@ -24,9 +24,9 @@ public interface CharacterRepository {
     Optional<CharacterDetailsDto> findById(Long id);
 
 
-    CharacterDto update(Long id, CharacterDto characterDto);
+    CharacterDto update(CharacterDto characterDto);
 
-    CharacterDetailsDto save(CharacterIdMovieDto characterDto);
+    CharacterDto save(CharacterDto characterDto);
 
     void deleteById(Long id);
 }

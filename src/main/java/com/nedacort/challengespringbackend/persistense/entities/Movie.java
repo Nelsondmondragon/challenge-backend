@@ -48,7 +48,7 @@ public class Movie {
     )
     @JsonManagedReference
 //    @Column(insertable = false, updatable = false)
-    private List<Character> characters = new ArrayList<>();
+    private List<Character> characters;
 
 
 }

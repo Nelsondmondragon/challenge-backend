@@ -54,8 +54,8 @@ public class CharacterControllerRest {
     }
 
     @PutMapping("/{id}")
-    private ResponseEntity<CharacterDto> update(@PathVariable Long id, @RequestBody CharacterDto characterDto) {
-        return new ResponseEntity<>(characterService.update(id, characterDto), HttpStatus.OK);
+    private ResponseEntity<CharacterDto> update(@PathVariable Long id, @RequestBody CharacterIdMovieDto characterIdMovieDto) {
+        return new ResponseEntity<>(characterService.update(id, characterIdMovieDto), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")

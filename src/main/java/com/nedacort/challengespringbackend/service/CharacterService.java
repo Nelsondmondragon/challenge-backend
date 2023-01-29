@@ -21,7 +21,7 @@ public interface CharacterService {
 
     List<CharacterDetailsDto> findByIdMovie(Long idMovie);
 
-    CharacterDto update(Long id, CharacterDto characterDto);
+    CharacterDto update(Long id, CharacterIdMovieDto characterDetailsDto);
 
     CharacterDetailsDto save(CharacterIdMovieDto characterDto);
 
